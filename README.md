@@ -14,6 +14,12 @@ c.) as XML file which can easily be read by a C# project
 
 Please go to the Release folder and see some of the already generated files.
 
+To see them correctly use these links:
+
+https://htmlpreview.github.io/?https://github.com/Elmue/WindowsRT-GUID-Analyzer/blob/main/Release/Windows%2011%20(Build%2022000)%20WinRT%20Interfaces.htm
+
+https://htmlpreview.github.io/?https://github.com/Elmue/WindowsRT-GUID-Analyzer/blob/main/Release/Windows%2011%20(Build%2022000)%20WinRT%20Activatable%20Classes.htm
+
 The main purpose is to get information about the Windows RT interfaces when you are analyzing a third party software.
 
 With IInspectable->GetIids() you can get a lot of IIDs but finding which class they correspond to is very difficult.

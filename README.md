@@ -12,6 +12,8 @@ b.) as INI file which can easily be read by a C++ project
 
 c.) as XML file which can easily be read by a C# project
 
+Please go to the Release folder and see some of the already generated files.
+
 The main purpose is to get information about the Windows RT interfaces when you are analyzing a third party software.
 
 With IInspectable->GetIids() you can get a lot of IIDs but finding which class they correspond to is very difficult.

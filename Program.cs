@@ -10,109 +10,142 @@ namespace GuidAnalyzer
 {
     class Program
     {
-        static int    SDK_BUILD = 22000;
-        static String SDK_PATH  = "E:\\Windows SDK\\Include\\10.0." + SDK_BUILD + ".0\\winrt\\";
-        static String OUT_PATH  = Path.GetDirectoryName(Application.ExecutablePath) + "\\";
+        static int    SDK_BUILD  = 22000;
+        static String SDK_PATH   = "E:\\Windows SDK\\Include\\10.0." + SDK_BUILD + ".0\\";
+        static bool   ONLY_WINRT = false; // true -> scan only SDK subfolder winrt, false -> scan all Windows COM interfaces
+        static String OUT_PATH   = Path.GetDirectoryName(Application.ExecutablePath) + "\\";
 
         static void Main(string[] args)
         {
-            Console.Write("\nReading Registry. Please wait...\n");
-
-            FileVersionInfo k_Info = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Kernel32.dll");
-
-            // read 4086 classes in 414 DLL's
-            int s32_TotCount;
-            SortedList<String, List<String>> i_ActivationDlls = ReadRegistry(out s32_TotCount);
-            WriteActivationDlls(i_ActivationDlls, s32_TotCount, k_Info.ProductBuildPart);
-
-            if (Directory.Exists(SDK_PATH))
+            try
             {
-                Console.Write("\nReading SDK Header Files. Please wait...\n");
+                // read 4086 classes in 414 DLL's
+                ParseRegistry();
 
                 // read 7854 interfaces
-                SortedList<String, String> i_Interfaces = ReadHeaderFiles();
-                WriteInterfaces(i_Interfaces, SDK_BUILD);
+                ParseHeaderFiles();
             }
-            else
+            catch (Exception Ex)
             {
-                Console.WriteLine("\nDirectory does not exist: " + SDK_PATH);
+                Console.WriteLine("\nException: " + Ex.Message);
             }
 
             Console.WriteLine("\nPress a key");
             Console.ReadKey();
         }
 
-        static SortedList<String, String> ReadHeaderFiles()
+        static void ParseHeaderFiles()
         {
+            if (!Directory.Exists(SDK_PATH))
+            {
+                Console.WriteLine("\nDirectory does not exist: " + SDK_PATH);
+                return;
+            }
+
+            Console.WriteLine();
             SortedList<String, String> i_Interfaces = new SortedList<String, String>();
 
-            foreach (String s_Path in Directory.EnumerateFiles(SDK_PATH, "*.h"))
+            // These SDK subfolders contain all documented Windows interface declarations
+            foreach (String s_SubDir in new String[] { "winrt", "um", "shared" })
             {
-                String s_FileName = Path.GetFileName(s_Path);
-                String[] s_Lines  = File.ReadAllLines(s_Path);
+                if (ONLY_WINRT && s_SubDir != "winrt")
+                    continue;
 
-                for (int L=0; L<s_Lines.Length; L++)
+                Console.Write("**** Parsing SDK Header Files (subfolder "+s_SubDir+"). Please wait...\n");
+
+                foreach (String s_Path in Directory.EnumerateFiles(SDK_PATH + s_SubDir, "*.h"))
                 {
-                    String s_Line = s_Lines[L];
-                    int s32_FirstLine = L;
+                    String s_FileName = s_SubDir + "\\" + Path.GetFileName(s_Path);
+                    String[] s_Lines  = File.ReadAllLines(s_Path);
 
-                    //     MIDL_INTERFACE("00000035-0000-0000-C000-000000000046")
-                    //     IActivationFactory : public IInspectable
-                    if (s_Line.Contains("MIDL_INTERFACE"))
+                    for (int L=0; L<s_Lines.Length; L++)
                     {
-                        String s_GUID = ExtractBetween(s_Line, "(", ")");
-                        if (s_GUID == null)
-                        {
-                            Console.WriteLine("Syntax Error in line " + L + " in " + s_FileName);
-                            continue;
-                        }
+                        String s_Line = s_Lines[L].Trim();
 
-                        s_Line = GetNextValidLine(s_Lines, ref L);
-                        if (s_Line == null)
+                        // Interface declaration in 2 lines:
+                        // MIDL_INTERFACE("00000035-0000-0000-C000-000000000046")
+                        // IActivationFactory : public IInspectable
+                        if (s_Line.StartsWith("MIDL_INTERFACE"))
                         {
-                            Console.WriteLine("Missing interface in line " + L + " in " + s_FileName);
-                            continue;
-                        }
+                            int s32_FirstLine = L;
 
-                        String[] s_Parts = s_Line.Split(':');
-                        if (s_Parts.Length != 2)
-                        {
-                            // IUnknown is not derived from another interface --> no ':' contained
-                            if (s_Line.Trim() != "IUnknown")
+                            String s_GUID = ExtractBetween(s_Line, "(", ")");
+                            if (s_GUID == null)
                             {
-                                Console.WriteLine("Syntax Error in line " + L + " in " + s_FileName);
-                                continue;   
+                                Console.WriteLine("Syntax Error (A) in line " + L + " in " + s_FileName);
+                                continue;
                             }
+
+                            s_Line = GetNextValidLine(s_Lines, ref L);
+                            if (s_Line == null)
+                            {
+                                Console.WriteLine("Syntax Error (B) in line " + L + " in " + s_FileName);
+                                continue;
+                            }
+
+                            String[] s_Parts = s_Line.Split(':');
+                            if (s_Parts.Length != 2)
+                            {
+                                // IUnknown is not derived from another interface --> no ':' contained
+                                if (s_Line != "IUnknown")
+                                {
+                                    Console.WriteLine("Syntax Error (C) in line " + L + " in " + s_FileName);
+                                    continue;   
+                                }
+                            }
+
+                            String s_Namespace = FindNamespace(s_Lines, s32_FirstLine);
+                            String s_FullName  = s_Namespace + s_Parts[0].Trim('"', ' ');
+
+                            AddInterface(i_Interfaces, s_GUID, s_FullName);
                         }
 
-                        String s_Namespace = FindNamespace(s_Lines, s32_FirstLine);
-                        String s_FullName  = s_Namespace + s_Parts[0].Trim('"', ' ');
-
-                        AddInterface(i_Interfaces, s_GUID, s_FullName);
-                    }
-
-                    // DECLARE_INTERFACE_IID_(ICompositorInterop, IUnknown, "25297D5C-3AD4-4C9C-B5CF-E36A38512330")
-                    else if (s_Line.Contains("DECLARE_INTERFACE_IID_"))
-                    {
-                        String s_Parenth = ExtractBetween(s_Line, "(", ")");
-                        if (s_Parenth == null)
+                        // Interface declaration in 1 line:
+                        // DECLARE_INTERFACE_IID_(ICompositorInterop, IUnknown, "25297D5C-3AD4-4C9C-B5CF-E36A38512330")
+                        else if (s_Line.StartsWith("DECLARE_INTERFACE_IID_")) // FIRST
                         {
-                            Console.WriteLine("Syntax Error in line " + L + " in " + s_FileName);
-                            continue;
+                            String s_Parenth = ExtractBetween(s_Line, "(", ")");
+                            if (s_Parenth == null)
+                            {
+                                Console.WriteLine("Syntax Error (D) in line " + L + " in " + s_FileName);
+                                continue;
+                            }
+
+                            String[] s_Parts = s_Parenth.Split(',');
+                            if (s_Parts.Length != 3)
+                            {
+                                Console.WriteLine("Syntax Error (E) in line " + L + " in " + s_FileName);
+                                continue;
+                            }
+
+                            AddInterface(i_Interfaces, s_Parts[2], s_Parts[0]);
                         }
 
-                        String[] s_Parts = s_Parenth.Split(',');
-                        if (s_Parts.Length != 3)
+                        // Interface declaration in 1 line:
+                        // DECLARE_INTERFACE_IID(IFileViewerA, "000214f0-0000-0000-c000-000000000046")
+                        else if (s_Line.StartsWith("DECLARE_INTERFACE_IID")) // AFTER
                         {
-                            Console.WriteLine("Syntax Error in line " + L + " in " + s_FileName);
-                            continue;
-                        }
+                            String s_Parenth = ExtractBetween(s_Line, "(", ")");
+                            if (s_Parenth == null)
+                            {
+                                Console.WriteLine("Syntax Error (F) in line " + L + " in " + s_FileName);
+                                continue;
+                            }
 
-                        AddInterface(i_Interfaces, s_Parts[2], s_Parts[0]);
+                            String[] s_Parts = s_Parenth.Split(',');
+                            if (s_Parts.Length != 2)
+                            {
+                                Console.WriteLine("Syntax Error (G) in line " + L + " in " + s_FileName);
+                                continue;
+                            }
+
+                            AddInterface(i_Interfaces, s_Parts[1], s_Parts[0]);
+                        }
                     }
                 }
             }
-            return i_Interfaces;
+
+            WriteInterfaces(i_Interfaces, SDK_BUILD);
         }
 
         static String ExtractBetween(String s_Line, String s_Start, String s_End)
@@ -135,26 +168,13 @@ namespace GuidAnalyzer
 
         static String GetNextValidLine(String[] s_Lines, ref int L)
         {
-            while (true)
+            for (int N=0; true; N++)
             {
                 L ++;
-                if (L >= s_Lines.Length)
+                if (L >= s_Lines.Length || N > 5)
                     return null;
 
-                String s_Line = s_Lines[L];
-                if (IsLineValid(s_Line))
-                    return s_Line;
-            }
-        }
-        static String GetPreviousValidLine(String[] s_Lines, ref int L)
-        {
-            while (true)
-            {
-                L --;
-                if (L < 0)
-                    return null;
-
-                String s_Line = s_Lines[L];
+                String s_Line = s_Lines[L].Trim();
                 if (IsLineValid(s_Line))
                     return s_Line;
             }
@@ -169,12 +189,16 @@ namespace GuidAnalyzer
         /// </summary>
         static bool IsLineValid(String s_Line)
         {
-            if (s_Line.Trim().Length == 0 ||
-                s_Line.Contains("#if")    || 
-                s_Line.Contains("#endif") || 
-                s_Line.Contains("/*")     || 
-                s_Line.Contains("*/")     || 
-                s_Line.Contains("DEPRECATED("))
+            // s_Line is already trimmed
+            if (s_Line.Length == 0            ||
+                s_Line.StartsWith("#if")      || 
+                s_Line.StartsWith("#endif")   || 
+                s_Line.StartsWith("#define")  || 
+                s_Line.StartsWith("/*")       || 
+                s_Line.StartsWith("*/")       || 
+                s_Line.StartsWith("{")        || 
+                s_Line.StartsWith("}")        || 
+                s_Line.StartsWith("DEPRECATED"))
                 return false;
 
             return true;
@@ -193,9 +217,17 @@ namespace GuidAnalyzer
 
             for (int i=0; i<8; i++)
             {
-                String s_Line = GetPreviousValidLine(s_Lines, ref L);
-                if (s_Line == null)
-                    return "";
+                String s_Line;
+                for (int N=0; true; N++)
+                {
+                    L --;
+                    if (L < 0 || N > 7)
+                        return "";
+
+                    s_Line = s_Lines[L].Trim();
+                    if (s_Line.StartsWith("namespace"))
+                        break;
+                }
 
                 String s_Namespace = ExtractBetween(s_Line, "namespace", "{");
                 if (s_Namespace == null)
@@ -210,32 +242,25 @@ namespace GuidAnalyzer
             return "";
         }
 
-        /// <summary>
-        /// Insert unique pair: i_Interfaces[Name] = GUID
-        /// </summary>
         static void AddInterface(SortedList<String, String> i_Interfaces, String s_Guid, String s_Name)
         {
-            s_Guid = s_Guid.Trim('"', ' ');
+            s_Guid = s_Guid.Trim('"', ' ', '{', '}').ToUpper();
             s_Name = s_Name.Trim('"', ' ');
 
-            foreach (KeyValuePair<String, String> i_Pair in i_Interfaces)
+            if (s_Guid.Length != 36 || s_Guid[8] != '-' || s_Guid[13] != '-' || s_Guid[18] != '-' || s_Guid[23] != '-')
             {
-                if (i_Pair.Key == s_Name && i_Pair.Value == s_Guid)
-                    return; // identical entry already exists
-                
-                if (i_Pair.Key == s_Name)
-                {
-                    String s_Msg = String.Format("Conflict: {0} is defined as {1} and {2}", s_Name, s_Guid, i_Pair.Value);
-                    Console.WriteLine(s_Msg);
-                }
-               
-                // FE616766-BF27-4064-87B7-6563BB11CE2E is ABI.Windows.Web.IWebErrorStatics and ABI.Windows.Data.Json.IJsonErrorStatics
-                // The same interface exists with 2 names
-                if (i_Pair.Value == s_Guid)
-                {
-                    String s_Msg = String.Format("Conflict: {0} is defined as {1} and {2}", s_Guid, s_Name, i_Pair.Key);
-                    Console.WriteLine(s_Msg);
-                }
+                Console.WriteLine("Invalid GUID: " + s_Guid);
+                return;
+            }
+
+            // --> concat multiple GUID's for the same interface name with a tab character.
+            String s_ExistGuid;
+            if (i_Interfaces.TryGetValue(s_Name, out s_ExistGuid))
+            {
+                if (s_ExistGuid.Contains(s_Guid))
+                    return;
+
+                s_Guid += '\t' + s_ExistGuid;
             }
                         
             i_Interfaces[s_Name] = s_Guid;
@@ -288,6 +313,7 @@ namespace GuidAnalyzer
         /// </summary>
         static void WriteInterfaces(SortedList<String, String> i_Interfaces, int s32_Build)
         {
+            String s_Title   = ONLY_WINRT ? "WinRT Interfaces" : "All Interfaces";
             String s_WinVer  = GetWindowsVersion(s32_Build);
             String s_Comment = String.Format("{0} interfaces automatically extracted from the {1} SDK header files",
                                              i_Interfaces.Count, s_WinVer);
@@ -296,20 +322,23 @@ namespace GuidAnalyzer
             StringBuilder s_Xml = new StringBuilder();
             StringBuilder s_Htm = new StringBuilder();
 
-            s_Ini.AppendFormat("; {0}\r\n[WinRT Interfaces]\r\n", s_Comment);
+            s_Ini.AppendFormat("; {0}\r\n[{1}]\r\n", s_Comment, s_Title);
 
-            s_Xml.Append(GetXmlHeader("WinRT Interfaces", s_Comment));
+            s_Xml.Append(GetXmlHeader(s_Title, s_Comment));
             s_Xml.Append("  <Interfaces>\r\n");
 
-            s_Htm.Append(GetHtmlHeader("WinRT Interfaces", s_Comment));
+            s_Htm.Append(GetHtmlHeader(s_Title, s_Comment));
             s_Htm.Append("<div>&nbsp;</div>\r\n");
             s_Htm.Append("<table border='1' cellspacing='0' cellpadding='0'>\r\n");
 
             foreach (KeyValuePair<String, String> i_Pair in i_Interfaces)
             { 
-                s_Ini.AppendFormat("{0} = {1}\r\n",                                   i_Pair.Value, i_Pair.Key);
-                s_Xml.AppendFormat("    <Interface GUID=\"{0}\" Name=\"{1}\" />\r\n", i_Pair.Value, i_Pair.Key);
-                s_Htm.AppendFormat("  <tr><td>{0}</td><td>{1}</td></tr>\r\n",         i_Pair.Value, i_Pair.Key);
+                foreach (String s_Guid in i_Pair.Value.Split('\t'))
+                {
+                    s_Ini.AppendFormat("{0} = {1}\r\n",                                   s_Guid, i_Pair.Key);
+                    s_Xml.AppendFormat("    <Interface GUID=\"{0}\" Name=\"{1}\" />\r\n", s_Guid, i_Pair.Key);
+                    s_Htm.AppendFormat("  <tr><td>{0}</td><td>{1}</td></tr>\r\n",         s_Guid, i_Pair.Key);
+                }
             }
 
             s_Xml.Append("  </Interfaces>\r\n");
@@ -317,18 +346,20 @@ namespace GuidAnalyzer
 
             s_Htm.Append("</table>\r\n</body>\r\n</html>\r\n");
 
-            WriteTextFile("WinRT Interfaces.ini", s_WinVer, s_Ini.ToString());
-            WriteTextFile("WinRT Interfaces.xml", s_WinVer, s_Xml.ToString());
-            WriteTextFile("WinRT Interfaces.htm", s_WinVer, s_Htm.ToString());
+            WriteTextFile(s_Title + ".ini", s_WinVer, s_Ini.ToString());
+            WriteTextFile(s_Title + ".xml", s_WinVer, s_Xml.ToString());
+            WriteTextFile(s_Title + ".htm", s_WinVer, s_Htm.ToString());
         }
 
         // ====================================================================================
 
-        static SortedList<String, List<String>> ReadRegistry(out int s32_TotCount)
+        static void ParseRegistry()
         {
+            Console.Write("\n**** Parsing Registry. Please wait...\n");
+
             const String REG_PATH = @"Software\Microsoft\WindowsRuntime\ActivatableClassId";
 
-            s32_TotCount = 0;
+            int s32_TotCount = 0;
             SortedList<String, List<String>> i_Dlls = new SortedList<String, List<String>>(StringComparer.InvariantCultureIgnoreCase);
 
             // On a 32 bit Windows the 64 bit Hive is ignored
@@ -358,7 +389,10 @@ namespace GuidAnalyzer
                     }
                 }
             }
-            return i_Dlls;
+
+            // Safe get Windows build number
+            FileVersionInfo k_Info = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Kernel32.dll");
+            WriteActivationDlls(i_Dlls, s32_TotCount, k_Info.ProductBuildPart);
         }
 
         /// <summary>

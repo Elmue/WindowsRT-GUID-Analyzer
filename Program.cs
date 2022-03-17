@@ -27,7 +27,7 @@ namespace GuidAnalyzer
 
             if (Directory.Exists(SDK_PATH))
             {
-                Console.Write("\nReading Header Files. Please wait...\n");
+                Console.Write("\nReading SDK Header Files. Please wait...\n");
 
                 // read 7854 interfaces
                 SortedList<String, String> i_Interfaces = ReadHeaderFiles();
@@ -35,7 +35,7 @@ namespace GuidAnalyzer
             }
             else
             {
-                Console.WriteLine("Directory does not exist: " + SDK_PATH);
+                Console.WriteLine("\nDirectory does not exist: " + SDK_PATH);
             }
 
             Console.WriteLine("\nPress a key");
@@ -68,11 +68,16 @@ namespace GuidAnalyzer
                         }
 
                         s_Line = GetNextValidLine(s_Lines, ref L);
+                        if (s_Line == null)
+                        {
+                            Console.WriteLine("Missing interface in line " + L + " in " + s_FileName);
+                            continue;
+                        }
 
                         String[] s_Parts = s_Line.Split(':');
                         if (s_Parts.Length != 2)
                         {
-                            // IUnknown is not derived from another interface
+                            // IUnknown is not derived from another interface --> no ':' contained
                             if (s_Line.Trim() != "IUnknown")
                             {
                                 Console.WriteLine("Syntax Error in line " + L + " in " + s_FileName);
@@ -87,7 +92,7 @@ namespace GuidAnalyzer
                     }
 
                     // DECLARE_INTERFACE_IID_(ICompositorInterop, IUnknown, "25297D5C-3AD4-4C9C-B5CF-E36A38512330")
-                    if (s_Line.Contains("DECLARE_INTERFACE_IID_"))
+                    else if (s_Line.Contains("DECLARE_INTERFACE_IID_"))
                     {
                         String s_Parenth = ExtractBetween(s_Line, "(", ")");
                         if (s_Parenth == null)
@@ -128,13 +133,6 @@ namespace GuidAnalyzer
             return s_Line.Substring(s32_Start, s32_End - s32_Start);
         }
 
-        /// <summary>
-        ///            MIDL_INTERFACE("7ae1fa72-029e-4dc5-a2f8-5fb763154150")
-        /// #if WINDOWS_AI_MACHINELEARNING_PREVIEW_MACHINELEARNINGPREVIEWCONTRACT_VERSION >= 0x20000
-        ///            DEPRECATED("Use IImageFeatureDescriptor instead of IImageVariableDescriptorPreview. For more info, see MSDN.")
-        /// #endif // WINDOWS_AI_MACHINELEARNING_PREVIEW_MACHINELEARNINGPREVIEWCONTRACT_VERSION >= 0x20000
-        ///            IImageVariableDescriptorPreview : public IInspectable
-        /// </summary>
         static String GetNextValidLine(String[] s_Lines, ref int L)
         {
             while (true)
@@ -162,12 +160,20 @@ namespace GuidAnalyzer
             }
         }
 
+        /// <summary>
+        ///            MIDL_INTERFACE("7ae1fa72-029e-4dc5-a2f8-5fb763154150")
+        /// #if WINDOWS_AI_MACHINELEARNING_PREVIEW_MACHINELEARNINGPREVIEWCONTRACT_VERSION >= 0x20000
+        ///            DEPRECATED("Use IImageFeatureDescriptor instead of IImageVariableDescriptorPreview. For more info, see MSDN.")
+        /// #endif // WINDOWS_AI_MACHINELEARNING_PREVIEW_MACHINELEARNINGPREVIEWCONTRACT_VERSION >= 0x20000
+        ///            IImageVariableDescriptorPreview : public IInspectable
+        /// </summary>
         static bool IsLineValid(String s_Line)
         {
             if (s_Line.Trim().Length == 0 ||
                 s_Line.Contains("#if")    || 
                 s_Line.Contains("#endif") || 
                 s_Line.Contains("/*")     || 
+                s_Line.Contains("*/")     || 
                 s_Line.Contains("DEPRECATED("))
                 return false;
 
@@ -205,7 +211,7 @@ namespace GuidAnalyzer
         }
 
         /// <summary>
-        /// Inster unique pair i_Interfaces[Name] = GUID
+        /// Insert unique pair: i_Interfaces[Name] = GUID
         /// </summary>
         static void AddInterface(SortedList<String, String> i_Interfaces, String s_Guid, String s_Name)
         {

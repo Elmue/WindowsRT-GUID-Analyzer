@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
@@ -34,6 +35,56 @@ namespace GuidAnalyzer
             Console.ReadKey();
         }
 
+        // =====================================================================================================================
+
+        static void ParseRegistry()
+        {
+            Console.Write("\n**** Parsing Registry. Please wait...\n");
+
+            const String REG_PATH = @"Software\Microsoft\WindowsRuntime\ActivatableClassId";
+
+            int s32_TotCount = 0;
+            SortedList<String, List<String>> i_Dlls = new SortedList<String, List<String>>(StringComparer.InvariantCultureIgnoreCase);
+
+            // On a 32 bit Windows the 64 bit Hive is ignored
+            using (RegistryKey i_HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            using (RegistryKey i_Main = i_HKLM.OpenSubKey(REG_PATH))
+            {
+                if (i_Main == null)
+                {
+                    Console.WriteLine("Registry key 'ActivatableClassId' does not exist.");
+                    return;
+                }
+
+                foreach (String s_Class in i_Main.GetSubKeyNames())
+                {
+                    using (RegistryKey i_Sub = i_Main.OpenSubKey(s_Class))
+                    {
+                        String s_DllPath = (String)i_Sub.GetValue("DllPath", null);
+                        if (s_DllPath == null)
+                        {
+                            // TODO: Read "Server" and add it to a separate list
+                            continue;
+                        }
+
+                        List<String> i_ClassesList;
+                        if (!i_Dlls.TryGetValue(s_DllPath, out i_ClassesList))
+                        {
+                            i_ClassesList = new List<string>();
+                            i_Dlls.Add(s_DllPath, i_ClassesList);
+                        }
+
+                        i_ClassesList.Add(s_Class);
+                        s32_TotCount ++;
+                    }
+                }
+            }
+
+            // Safe get Windows build number
+            FileVersionInfo k_Info = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Kernel32.dll");
+            WriteActivationDlls(i_Dlls, s32_TotCount, k_Info.ProductBuildPart);
+        }
+
         static void ParseHeaderFiles()
         {
             if (!Directory.Exists(SDK_PATH))
@@ -44,6 +95,8 @@ namespace GuidAnalyzer
 
             Console.WriteLine();
             SortedList<String, String> i_Interfaces = new SortedList<String, String>();
+            SortedList<String, String> i_Guids      = new SortedList<String, String>();
+            Dictionary<String, String> i_Ambiguous  = new Dictionary<String, String>();
 
             // These SDK subfolders contain all documented Windows interface declarations
             foreach (String s_SubDir in new String[] { "winrt", "um", "shared" })
@@ -97,7 +150,7 @@ namespace GuidAnalyzer
                             String s_Namespace = FindNamespace(s_Lines, s32_FirstLine);
                             String s_FullName  = s_Namespace + s_Parts[0].Trim('"', ' ');
 
-                            AddInterface(i_Interfaces, s_GUID, s_FullName);
+                            AddInterface(s_GUID, s_FullName, i_Interfaces, i_Guids, i_Ambiguous);
                         }
 
                         // Interface declaration in 1 line:
@@ -118,7 +171,7 @@ namespace GuidAnalyzer
                                 continue;
                             }
 
-                            AddInterface(i_Interfaces, s_Parts[2], s_Parts[0]);
+                            AddInterface(s_Parts[2], s_Parts[0], i_Interfaces, i_Guids, i_Ambiguous);
                         }
 
                         // Interface declaration in 1 line:
@@ -139,14 +192,16 @@ namespace GuidAnalyzer
                                 continue;
                             }
 
-                            AddInterface(i_Interfaces, s_Parts[1], s_Parts[0]);
+                            AddInterface(s_Parts[1], s_Parts[0], i_Interfaces, i_Guids, i_Ambiguous);
                         }
                     }
                 }
             }
 
-            WriteInterfaces(i_Interfaces, SDK_BUILD);
+            WriteInterfaces(i_Interfaces, i_Ambiguous, SDK_BUILD);
         }
+
+        // --------------------------------------------------------------------------
 
         static String ExtractBetween(String s_Line, String s_Start, String s_End)
         {
@@ -242,7 +297,10 @@ namespace GuidAnalyzer
             return "";
         }
 
-        static void AddInterface(SortedList<String, String> i_Interfaces, String s_Guid, String s_Name)
+        static void AddInterface(String s_Guid, String s_Name, 
+                                 SortedList<String, String> i_Interfaces, 
+                                 SortedList<String, String> i_Guids, 
+                                 Dictionary<String, String> i_Ambiguous)
         {
             s_Guid = s_Guid.Trim('"', ' ', '{', '}').ToUpper();
             s_Name = s_Name.Trim('"', ' ');
@@ -262,43 +320,121 @@ namespace GuidAnalyzer
 
                 s_Guid += '\t' + s_ExistGuid;
             }
-                        
             i_Interfaces[s_Name] = s_Guid;
+
+            // ------------------------
+
+            // Microsoft has declared multiple ambiguous interfaces --> warning
+            String s_ExistName;
+            if (i_Guids.TryGetValue(s_Guid, out s_ExistName))
+            {
+                String s_Ambig;
+                if (!i_Ambiguous.TryGetValue(s_Guid, out s_Ambig)) s_Ambig = "";
+
+                if (!s_Ambig.Contains(s_Name))      s_Ambig += "\t" + s_Name;
+                if (!s_Ambig.Contains(s_ExistName)) s_Ambig += "\t" + s_ExistName;
+                i_Ambiguous[s_Guid] = s_Ambig.Trim();
+            }
+            i_Guids[s_Guid] = s_Name;
         }
 
-        static void WriteTextFile(String s_FileName, String s_WinVer, String s_Text)
+        // =========================================================================================
+
+        /// <summary>
+        /// Write an INI and a HTML file
+        /// </summary>
+        static void WriteInterfaces(SortedList<String, String> i_Interfaces, Dictionary<String, String> i_Ambiguous, int s32_Build)
         {
-            String s_Path = OUT_PATH + s_WinVer + " " + s_FileName;
-            File.WriteAllText(s_Path, s_Text, Encoding.UTF8);
-            Console.WriteLine("File saved: " + s_Path);
+            String s_WinVer  = GetWindowsVersion(s32_Build);
+            String s_Title   = ONLY_WINRT ? "WinRT Interfaces" : "All Interfaces";
+            String s_Comment = String.Format("{0} interfaces automatically extracted from the {1} SDK header files (https://github.com/Elmue/WindowsRT-GUID-Analyzer)",
+                                             i_Interfaces.Count, s_WinVer);
+
+            StringBuilder i_Ini = new StringBuilder();
+            StringBuilder i_Xml = new StringBuilder();
+            StringBuilder i_Htm = new StringBuilder();
+            StringBuilder i_Cpp = new StringBuilder();
+            StringBuilder i_CS  = new StringBuilder();
+
+            i_Ini.Append("[All Interfaces]\r\n");
+
+            i_Htm.Append("<div>&nbsp;</div>\r\n");
+            i_Htm.Append("<table border='1' cellspacing='0' cellpadding='0'>\r\n");
+
+            foreach (KeyValuePair<String, String> i_Pair in i_Interfaces)
+            { 
+                foreach (String s_Guid in i_Pair.Value.Split('\t'))
+                {
+                    String s_XmlWarn = "";
+                    String s_Ambig;
+                    if (i_Ambiguous.TryGetValue(s_Guid, out s_Ambig))
+                    {
+                        s_Ambig = s_Ambig.Replace("\t", " and ");
+
+                        i_Htm.AppendFormat("\t<tr><td colspan='2' class='Warning'>The following GUID is ambiguous for {0}</td></tr>\r\n", s_Ambig);
+                        i_Ini.AppendFormat("\r\n; The following GUID is ambiguous for {0}\r\n",                  s_Ambig);
+                        i_Cpp.AppendFormat("\r\n\t\t// The following GUID is ambiguous for {0}\r\n",             s_Ambig); 
+                        i_CS .AppendFormat("\r\n\t\t// The following GUID is ambiguous for {0}\r\n",             s_Ambig);
+                        s_XmlWarn = String.Format("\r\n\t           Warning=\"This GUID is ambiguous for {0}\"", s_Ambig);
+                    }
+
+                    i_Ini.AppendFormat("{0} = {1}\r\n",                                    s_Guid, i_Pair.Key);
+                    i_Xml.AppendFormat("\t<Interface GUID=\"{0}\" Name=\"{1}\"{2} />\r\n", s_Guid, i_Pair.Key, s_XmlWarn);
+                    i_Htm.AppendFormat("\t<tr><td>{0}</td><td>{1}</td></tr>\r\n",          s_Guid, i_Pair.Key);
+                    i_Cpp.AppendFormat("\t\tInterfaces().SetAt(L\"{0}\", L\"{1}\");\r\n",  s_Guid, i_Pair.Key);
+                    i_CS .AppendFormat("\t\tmi_Interfaces[\"{0}\"] = \"{1}\";\r\n",        s_Guid, i_Pair.Key);
+                }
+            }
+
+            i_Htm.Append("</table>\r\n");
+
+            SaveTemplate(".ini", s_WinVer, i_Ini, s_Title, s_Comment);
+            SaveTemplate(".xml", s_WinVer, i_Xml, s_Title, s_Comment);
+            SaveTemplate(".htm", s_WinVer, i_Htm, s_Title, s_Comment);
+            SaveTemplate(".h",   s_WinVer, i_Cpp, s_Title, s_Comment);
+            SaveTemplate(".cs",  s_WinVer, i_CS , s_Title, s_Comment);
         }
 
-        static String GetHtmlHeader(String s_Title, String s_Comment)
+        /// <summary>
+        /// Write an INI and a HTML file
+        /// </summary>
+        static void WriteActivationDlls(SortedList<String, List<String>> i_Dlls, int s32_TotCount, int s32_Build)
         {
-            return String.Format("<!DOCTYPE html>\r\n"
-                               + "<html>\r\n"
-                               + "<head>\r\n"
-                               + "  <title>{0}</title>\r\n"
-                               + "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n"
-                               + "  <style>\r\n"
-                               + "    table    {{ font-family: Courier New; font-size:14px; }}\r\n"
-                               + "    td       {{ padding-left:4px; padding-right:4px; }}\r\n"
-                               + "    h4       {{ color:blue; }}\r\n"
-                               + "    .Comment {{ color:darkred; }}\r\n"
-                               + "  </style>\r\n"
-                               + "</head>\r\n"
-                               + "<body>\r\n"
-                               + "<h2>{0}</h2>\r\n"
-                               + "<div class='Comment'>{1}</div>\r\n", s_Title, s_Comment);
+            String s_WinVer  = GetWindowsVersion(s32_Build);
+            String s_Title   = "WinRT Activatable Classes";
+            String s_Comment = String.Format("{0} Activatable Classes automatically extracted from the {1} Registry (https://github.com/Elmue/WindowsRT-GUID-Analyzer)",
+                                             s32_TotCount, s_WinVer);
+
+            StringBuilder i_Ini = new StringBuilder();
+            StringBuilder i_Xml = new StringBuilder();
+            StringBuilder i_Htm = new StringBuilder();
+
+            foreach (KeyValuePair<String, List<String>> i_Pair in i_Dlls)
+            {
+                i_Ini.AppendFormat("\r\n[{0}]\r\n",            i_Pair.Key);
+                i_Xml.AppendFormat("\t<DLL Path=\"{0}\">\r\n", i_Pair.Key);
+                i_Htm.AppendFormat("<h4>{0}</h4>\r\n",         i_Pair.Key);
+                i_Htm.Append("<table border='1' cellspacing='0' cellpadding='0'>\r\n");
+
+                i_Pair.Value.Sort();
+                for (int C=0; C<i_Pair.Value.Count; C++)
+                {
+                    String s_Class = i_Pair.Value[C];
+                    i_Ini.AppendFormat("Class_{0} = {1}\r\n",                     C+1, s_Class);
+                    i_Xml.AppendFormat("\t\t<Class Name=\"{0}\" />\r\n",               s_Class);
+                    i_Htm.AppendFormat("\t<tr><td>{0}</td><td>{1}</td></tr>\r\n", C+1, s_Class);
+                }
+
+                i_Xml.Append("\t</DLL>\r\n");
+                i_Htm.Append("</table>\r\n");
+            }
+
+            SaveTemplate(".ini", s_WinVer, i_Ini, s_Title, s_Comment);
+            SaveTemplate(".xml", s_WinVer, i_Xml, s_Title, s_Comment);
+            SaveTemplate(".htm", s_WinVer, i_Htm, s_Title, s_Comment);
         }
 
-        static String GetXmlHeader(String s_Title, String s_Comment)
-        {
-            return String.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
-                               + "<Xml>\r\n"
-                               + "  <Title>{0}</Title>\r\n"
-                               + "  <Comment>{1}</Comment>\r\n", s_Title, s_Comment);
-        }
+        // =========================================================================================
 
         static String GetWindowsVersion(int s32_Build)
         {
@@ -308,140 +444,24 @@ namespace GuidAnalyzer
             return String.Format("Windows {0} (Build {1})", s_Ver, s32_Build);
         }
 
-        /// <summary>
-        /// Write an INI and a HTML file
-        /// </summary>
-        static void WriteInterfaces(SortedList<String, String> i_Interfaces, int s32_Build)
+        static String LoadResourceString(String s_Resource)
+		{
+			Assembly i_Ass  = Assembly.GetExecutingAssembly();
+			Stream   i_Strm = i_Ass.GetManifestResourceStream("GuidAnalyzer.Resources." + s_Resource);
+            if (i_Strm == null)
+                throw new Exception("Resource not found: "+s_Resource);
+
+			StreamReader i_Read = new StreamReader(i_Strm, true);
+			return i_Read.ReadToEnd();
+		}
+
+        static void SaveTemplate(String s_FileExt, String s_WinVer, StringBuilder i_Builder, String s_Title, String s_Comment)
         {
-            String s_Title   = ONLY_WINRT ? "WinRT Interfaces" : "All Interfaces";
-            String s_WinVer  = GetWindowsVersion(s32_Build);
-            String s_Comment = String.Format("{0} interfaces automatically extracted from the {1} SDK header files",
-                                             i_Interfaces.Count, s_WinVer);
-
-            StringBuilder s_Ini = new StringBuilder();
-            StringBuilder s_Xml = new StringBuilder();
-            StringBuilder s_Htm = new StringBuilder();
-
-            s_Ini.AppendFormat("; {0}\r\n[{1}]\r\n", s_Comment, s_Title);
-
-            s_Xml.Append(GetXmlHeader(s_Title, s_Comment));
-            s_Xml.Append("  <Interfaces>\r\n");
-
-            s_Htm.Append(GetHtmlHeader(s_Title, s_Comment));
-            s_Htm.Append("<div>&nbsp;</div>\r\n");
-            s_Htm.Append("<table border='1' cellspacing='0' cellpadding='0'>\r\n");
-
-            foreach (KeyValuePair<String, String> i_Pair in i_Interfaces)
-            { 
-                foreach (String s_Guid in i_Pair.Value.Split('\t'))
-                {
-                    s_Ini.AppendFormat("{0} = {1}\r\n",                                   s_Guid, i_Pair.Key);
-                    s_Xml.AppendFormat("    <Interface GUID=\"{0}\" Name=\"{1}\" />\r\n", s_Guid, i_Pair.Key);
-                    s_Htm.AppendFormat("  <tr><td>{0}</td><td>{1}</td></tr>\r\n",         s_Guid, i_Pair.Key);
-                }
-            }
-
-            s_Xml.Append("  </Interfaces>\r\n");
-            s_Xml.Append("</Xml>\r\n");
-
-            s_Htm.Append("</table>\r\n</body>\r\n</html>\r\n");
-
-            WriteTextFile(s_Title + ".ini", s_WinVer, s_Ini.ToString());
-            WriteTextFile(s_Title + ".xml", s_WinVer, s_Xml.ToString());
-            WriteTextFile(s_Title + ".htm", s_WinVer, s_Htm.ToString());
-        }
-
-        // ====================================================================================
-
-        static void ParseRegistry()
-        {
-            Console.Write("\n**** Parsing Registry. Please wait...\n");
-
-            const String REG_PATH = @"Software\Microsoft\WindowsRuntime\ActivatableClassId";
-
-            int s32_TotCount = 0;
-            SortedList<String, List<String>> i_Dlls = new SortedList<String, List<String>>(StringComparer.InvariantCultureIgnoreCase);
-
-            // On a 32 bit Windows the 64 bit Hive is ignored
-            using (RegistryKey i_HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
-            using (RegistryKey i_Main = i_HKLM.OpenSubKey(REG_PATH))
-            {
-                foreach (String s_Class in i_Main.GetSubKeyNames())
-                {
-                    using (RegistryKey i_Sub = i_Main.OpenSubKey(s_Class))
-                    {
-                        String s_DllPath = (String)i_Sub.GetValue("DllPath", null);
-                        if (s_DllPath == null)
-                        {
-                            // TODO: Read "Server" and add it to a separate list
-                            continue;
-                        }
-
-                        List<String> i_ClassesList;
-                        if (!i_Dlls.TryGetValue(s_DllPath, out i_ClassesList))
-                        {
-                            i_ClassesList = new List<string>();
-                            i_Dlls.Add(s_DllPath, i_ClassesList);
-                        }
-
-                        i_ClassesList.Add(s_Class);
-                        s32_TotCount ++;
-                    }
-                }
-            }
-
-            // Safe get Windows build number
-            FileVersionInfo k_Info = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Kernel32.dll");
-            WriteActivationDlls(i_Dlls, s32_TotCount, k_Info.ProductBuildPart);
-        }
-
-        /// <summary>
-        /// Write an INI and a HTML file
-        /// </summary>
-        static void WriteActivationDlls(SortedList<String, List<String>> i_Dlls, int s32_TotCount, int s32_Build)
-        {
-            String s_WinVer  = GetWindowsVersion(s32_Build);
-            String s_Comment = String.Format("{0} Activatable Classes automatically extracted from the {1} Registry",
-                                             s32_TotCount, s_WinVer);
-
-            StringBuilder s_Ini = new StringBuilder();
-            StringBuilder s_Xml = new StringBuilder();
-            StringBuilder s_Htm = new StringBuilder();
-
-            s_Ini.AppendFormat("; {0}\r\n", s_Comment);
-            s_Xml.Append(GetXmlHeader ("WinRT Activatable Classes", s_Comment));
-            s_Htm.Append(GetHtmlHeader("WinRT Activatable Classes", s_Comment));
-
-            s_Xml.Append("  <DLLs>\r\n");
-
-            foreach (KeyValuePair<String, List<String>> i_Pair in i_Dlls)
-            {
-                s_Ini.AppendFormat("\r\n[{0}]\r\n",              i_Pair.Key);
-                s_Xml.AppendFormat("    <DLL Path=\"{0}\">\r\n", i_Pair.Key);
-                s_Htm.AppendFormat("<h4>{0}</h4>\r\n",           i_Pair.Key);
-                s_Htm.Append("<table border='1' cellspacing='0' cellpadding='0'>\r\n");
-
-                i_Pair.Value.Sort();
-                for (int C=0; C<i_Pair.Value.Count; C++)
-                {
-                    String s_Class = i_Pair.Value[C];
-                    s_Ini.AppendFormat("Class_{0} = {1}\r\n",                     C+1, s_Class);
-                    s_Htm.AppendFormat("  <tr><td>{0}</td><td>{1}</td></tr>\r\n", C+1, s_Class);
-                    s_Xml.AppendFormat("      <Class Name=\"{0}\" />\r\n",             s_Class);
-                }
-
-                s_Xml.Append("    </DLL>\r\n");
-                s_Htm.Append("</table>\r\n");
-            }
-
-            s_Xml.Append("  </DLLs>\r\n");
-            s_Xml.Append("</Xml>\r\n");
-
-            s_Htm.Append("</body>\r\n</html>\r\n");
-
-            WriteTextFile("WinRT Activatable Classes.ini", s_WinVer, s_Ini.ToString());
-            WriteTextFile("WinRT Activatable Classes.xml", s_WinVer, s_Xml.ToString());
-            WriteTextFile("WinRT Activatable Classes.htm", s_WinVer, s_Htm.ToString());
+            String s_Template = LoadResourceString("Template" + s_FileExt);
+            String s_Text     = String.Format(s_Template, s_Title, s_Comment, i_Builder.ToString().TrimEnd());
+            String s_Path     = OUT_PATH + s_WinVer + " " + s_Title + s_FileExt;
+            File.WriteAllText(s_Path, s_Text, Encoding.UTF8);
+            Console.WriteLine("File saved: " + s_Path);
         }
     }
 }

@@ -41,6 +41,17 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <EmbeddedResource Include="Resources\Template.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Template.htm" />
+    <EmbeddedResource Include="Resources\Template.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Template.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Template.ini" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

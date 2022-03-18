@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ElmueSoft")]
 [assembly: AssemblyProduct("GuidAnalyzer")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
-[assembly: AssemblyTrademark("https://netcult.ch/elmue")]
+[assembly: AssemblyCopyright("No Copyright ©2022")]
+[assembly: AssemblyTrademark("https://github.com/Elmue/WindowsRT-GUID-Analyzer")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

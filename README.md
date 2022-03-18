@@ -1,5 +1,10 @@
-The Windows RT CLSIDs are no longer stored in the registry as formerly the COM interfaces were under HKEY_CLASSES_ROOT\CLSID.
-To get the interface name from a given CLSID / GUID / IID I wrote a tool which has 2 functionalities:
+The Windows RT CLSIDs are no longer stored in the registry as formerly the COM interfaces under HKEY_CLASSES_ROOT\CLSID.
+The purpose of this project is to get the interface name from a GUID when you are analyzing a third party software.
+With IInspectable->GetIids() you can get a lot of IIDs but getting the information to which class the IID corresponds is not easy.
+
+Now you can easily implement a Debug function into your code which displays interface names instead of cryptic GUID's.
+
+This tool which has 2 functionalities:
 
 1.) Extract all Windows RT Activitable Classes from the Windows Registry and find out in which DLL they are implemented
 
@@ -9,11 +14,15 @@ The results are saved:
 
 a.) as HTML table
 
-b.) as INI file which can easily be read by a C++ project
+b.) as INI file
 
-c.) as XML file which can easily be read by a C# project
+c.) as XML file
 
-You can also chose with variable ONLY_WINRT=false to extract ALL Windows COM interfaces, which results in 15000 interfaces.
+d.) as C# file which includes a function GetInterfaceName() which retuns the interface name by a given GUID
+
+e.) as C++ file which includes a function GetInterfaceName() which retuns the interface name by a given GUID
+
+You can also set variable ONLY_WINRT=false to extract ALL Windows COM interfaces, which results in 15000 interfaces.
 
 Please go to the Release folder and see some of the already generated files.
 To see them correctly use these links:
@@ -27,9 +36,4 @@ https://htmlpreview.github.io/?https://github.com/Elmue/WindowsRT-GUID-Analyzer/
 All 15000 Windows interfaces (Windows 11):
 https://htmlpreview.github.io/?https://github.com/Elmue/WindowsRT-GUID-Analyzer/blob/main/Release/Windows%2011%20(Build%2022000)%20All%20Interfaces.htm
 
-The main purpose is to get information about the Windows interfaces when you are analyzing a third party software.
 
-With IInspectable->GetIids() you can get a lot of IIDs but getting the information to which class the IID corresponds is not easy.
-With these XML or INI files you can easily implement a Debug function into your code which returns the interface name for a given IID.
-
-You need one line of code to get an interface name by a given IID from the INI file using the Windows API GetPrivateProfileString().

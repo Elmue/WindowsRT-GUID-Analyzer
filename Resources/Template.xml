@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Xml>
+	<Title>{0}</Title>
+	<Comment>{1}</Comment>
+{2}
+</Xml>

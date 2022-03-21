@@ -9,8 +9,10 @@ public class Debugging
 	public static String GetInterfaceName(String s_Guid)
 	{{
 		String s_Name;
-		mi_Interfaces.TryGetValue(s_Guid.ToUpper(), out s_Name);
-		return s_Name;
+		if (mi_Interfaces.TryGetValue(s_Guid.ToUpper(), out s_Name))
+			return s_Name;
+		else
+			return s_Guid;
 	}}
 	
 	// {1}

@@ -1,4 +1,5 @@
-﻿#include <afxcoll.h>
+﻿#pragma once
+#include <afxcoll.h>
 #include <assert.h>
 
 #if _DEBUG
@@ -13,7 +14,9 @@ public:
 		s_Guid.MakeUpper();
 		CString s_Name;
 		Interfaces().Lookup(s_Guid, s_Name);
-		return s_Name;
+
+		if (s_Name.IsEmpty()) return s_Guid;
+		else                  return s_Name;
 	}}
 
 	// {1}

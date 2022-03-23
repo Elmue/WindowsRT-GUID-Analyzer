@@ -30,10 +30,10 @@ To see them correctly use these links:
 All 4100 Windows RT activatable classes (Windows 11):
 https://htmlpreview.github.io/?https://github.com/Elmue/WindowsRT-GUID-Analyzer/blob/main/Release/Windows%2011%20(Build%2022000)%20WinRT%20Activatable%20Classes.htm
 
-All 7800 Windows RT interfaces (Windows 11):
+All 12400 Windows RT interfaces (Windows 11):
 https://htmlpreview.github.io/?https://github.com/Elmue/WindowsRT-GUID-Analyzer/blob/main/Release/Windows%2011%20(Build%2022000)%20WinRT%20Interfaces.htm
 
-All 15000 Windows interfaces (Windows 11):
+All 25600 Windows interfaces (Windows 11):
 https://htmlpreview.github.io/?https://github.com/Elmue/WindowsRT-GUID-Analyzer/blob/main/Release/Windows%2011%20(Build%2022000)%20All%20Interfaces.htm
 
 

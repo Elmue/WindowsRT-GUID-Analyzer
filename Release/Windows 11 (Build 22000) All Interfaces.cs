@@ -15,7 +15,7 @@ public class Debugging
 			return s_Guid;
 	}
 	
-	// 25623 interfaces automatically extracted from the Windows 11 (Build 22000) SDK header files (https://github.com/Elmue/WindowsRT-GUID-Analyzer)
+	// 25680 interfaces automatically extracted from the Windows 11 (Build 22000) SDK header files (https://github.com/Elmue/WindowsRT-GUID-Analyzer)
 	static Debugging()
 	{
 		mi_Interfaces["36ADB6D9-DA1F-45D8-A499-86167E0F936B"] = "__MIDL___MIDL_itf_ctffunc_0000_0011_0001";
@@ -2208,6 +2208,11 @@ public class Debugging
 		mi_Interfaces["A0E27C8B-50CB-4A58-9BCF-E472B99FBA04"] = "ABI.Windows.Devices.WiFiDirect.Services.IWiFiDirectServiceSessionRequest";
 		mi_Interfaces["74BDCC11-53D6-4999-B4F8-6C8ECC1771E7"] = "ABI.Windows.Devices.WiFiDirect.Services.IWiFiDirectServiceSessionRequestedEventArgs";
 		mi_Interfaces["7DB40045-FD74-4688-B725-5DCE86ACF233"] = "ABI.Windows.Devices.WiFiDirect.Services.IWiFiDirectServiceStatics";
+		mi_Interfaces["6D844858-0CFF-4590-AE89-95A5A5C8B4B8"] = "ABI.Windows.Foundation.AsyncActionProgressHandler<TProgress>";
+		mi_Interfaces["9C029F91-CC84-44FD-AC26-0A6C4E555281"] = "ABI.Windows.Foundation.AsyncActionWithProgressCompletedHandler<TProgress>";
+		mi_Interfaces["FCDCF02C-E5D8-4478-915A-4D90B74B83A5"] = "ABI.Windows.Foundation.AsyncOperationCompletedHandler<TResult>";
+		mi_Interfaces["55690902-0AAB-421A-8778-F8CE5026D758"] = "ABI.Windows.Foundation.AsyncOperationProgressHandler<TResult, TProgress>";
+		mi_Interfaces["E85DF41D-6AA7-46E3-A8E2-F009D840C627"] = "ABI.Windows.Foundation.AsyncOperationWithProgressCompletedHandler<TResult, TProgress>";
 		mi_Interfaces["E4A5D51B-0047-5C20-8A42-D265732E8117"] = "ABI.Windows.Foundation.Collections.IIterable<__FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue*>";
 		mi_Interfaces["AE44597E-D411-5B7F-BBEC-6A96C94A107A"] = "ABI.Windows.Foundation.Collections.IIterable<__FIIterable_1_Windows__CFoundation__CPoint*>";
 		mi_Interfaces["F3B20528-E3B3-5331-B2D0-0C2623AEE785"] = "ABI.Windows.Foundation.Collections.IIterable<__FIKeyValuePair_2_GUID_IInspectable*>";
@@ -2859,6 +2864,7 @@ public class Debugging
 		mi_Interfaces["932EEF5E-2C2F-5EAE-929A-74E973B57C27"] = "ABI.Windows.Foundation.Collections.IIterable<struct ABI.Windows.UI.Color>";
 		mi_Interfaces["745698BF-22AD-5C0D-B0E0-07D35A1C9719"] = "ABI.Windows.Foundation.Collections.IIterable<struct ABI.Windows.UI.WindowId>";
 		mi_Interfaces["2AD42FDB-56DB-500B-8EA8-3D57EDFADFC6"] = "ABI.Windows.Foundation.Collections.IIterable<struct ABI.Windows.UI.Xaml.Documents.TextRange>";
+		mi_Interfaces["FAA585EA-6214-4217-AFDA-7F46DE5869B3"] = "ABI.Windows.Foundation.Collections.IIterable<T>";
 		mi_Interfaces["ECFA9A6F-FA2E-5345-B297-EFB4E8C6BE87"] = "ABI.Windows.Foundation.Collections.IIterable<UINT16>";
 		mi_Interfaces["421D4B91-B13B-5F37-AE54-B5249BD80539"] = "ABI.Windows.Foundation.Collections.IIterable<UINT32>";
 		mi_Interfaces["4B3A3229-7995-5F3C-B248-6C1F7E664F01"] = "ABI.Windows.Foundation.Collections.IIterable<UINT64>";
@@ -3513,6 +3519,7 @@ public class Debugging
 		mi_Interfaces["C4310B12-7AC2-5E5B-B511-E546EEA473B4"] = "ABI.Windows.Foundation.Collections.IIterator<struct ABI.Windows.UI.Color>";
 		mi_Interfaces["BA0A30A1-C082-5671-AC07-7AAA4F269670"] = "ABI.Windows.Foundation.Collections.IIterator<struct ABI.Windows.UI.WindowId>";
 		mi_Interfaces["71F63622-C0FE-5423-914E-D319D25BCC84"] = "ABI.Windows.Foundation.Collections.IIterator<struct ABI.Windows.UI.Xaml.Documents.TextRange>";
+		mi_Interfaces["6A79E863-4300-459A-9966-CBB660963EE1"] = "ABI.Windows.Foundation.Collections.IIterator<T>";
 		mi_Interfaces["5738FC25-402B-5FC1-B1E4-0AA24EF652F1"] = "ABI.Windows.Foundation.Collections.IIterator<UINT16>";
 		mi_Interfaces["F06A2739-9443-5EF0-B284-DC5AFF3E7D10"] = "ABI.Windows.Foundation.Collections.IIterator<UINT32>";
 		mi_Interfaces["C473ED96-76E3-5FF2-9435-47FEEBFE9539"] = "ABI.Windows.Foundation.Collections.IIterator<UINT64>";
@@ -3558,6 +3565,7 @@ public class Debugging
 		mi_Interfaces["60310303-49C5-52E6-ABC6-A9B36ECCC716"] = "ABI.Windows.Foundation.Collections.IKeyValuePair<HSTRING, HSTRING>";
 		mi_Interfaces["09335560-6C6B-5A26-9348-97B781132B20"] = "ABI.Windows.Foundation.Collections.IKeyValuePair<HSTRING, IInspectable*>";
 		mi_Interfaces["59E7AE0C-C29D-5AD6-BEF5-DEDB52A198E1"] = "ABI.Windows.Foundation.Collections.IKeyValuePair<IInspectable*, IInspectable*>";
+		mi_Interfaces["02B51929-C1C4-4A7E-8940-0312B5C18500"] = "ABI.Windows.Foundation.Collections.IKeyValuePair<K, V>";
 		mi_Interfaces["82A3A3B7-E04A-5395-8487-7F94F1508CE7"] = "ABI.Windows.Foundation.Collections.IKeyValuePair<UINT32, ABI.Windows.Storage.Streams.IBuffer*>";
 		mi_Interfaces["5EE3189C-7DBF-5998-AD07-5414FB82567C"] = "ABI.Windows.Foundation.Collections.IMap<GUID, IInspectable*>";
 		mi_Interfaces["E475CA9D-6AFB-5992-993E-53E6EF7A9ECD"] = "ABI.Windows.Foundation.Collections.IMap<HSTRING, __FIVector_1_HSTRING*>";
@@ -3573,10 +3581,14 @@ public class Debugging
 		mi_Interfaces["4BA9AA1D-57AC-54DE-A807-B52E689BFC04"] = "ABI.Windows.Foundation.Collections.IMap<HSTRING, ABI.Windows.UI.Composition.ICompositionAnimationBase*>";
 		mi_Interfaces["41F50F14-9A3C-5240-B042-1BFF02E57028"] = "ABI.Windows.Foundation.Collections.IMap<HSTRING, enum ABI.Windows.UI.Composition.Scenes.SceneAttributeSemantic>";
 		mi_Interfaces["F6D1F700-49C2-52AE-8154-826F9908773C"] = "ABI.Windows.Foundation.Collections.IMap<HSTRING, HSTRING>";
+
+		// The following GUID is ambiguous for IStaticLifetimeCollection and ABI.Windows.Foundation.Collections.IMap<HSTRING, IInspectable*>
 		mi_Interfaces["1B0D3570-0877-5EC2-8A2C-3B9539506ACA"] = "ABI.Windows.Foundation.Collections.IMap<HSTRING, IInspectable*>";
 		mi_Interfaces["F5F69427-55ED-5512-8429-D4F6626DFCDD"] = "ABI.Windows.Foundation.Collections.IMap<IInspectable*, IInspectable*>";
+		mi_Interfaces["3C2925FE-8519-45C1-AA79-197B6718C1C1"] = "ABI.Windows.Foundation.Collections.IMap<K, V>";
 		mi_Interfaces["5D2591DF-48C5-5734-9EF1-BD639B032007"] = "ABI.Windows.Foundation.Collections.IMap<UINT32, ABI.Windows.Storage.Streams.IBuffer*>";
 		mi_Interfaces["60141EFB-F2F9-5377-96FD-F8C60D9558B5"] = "ABI.Windows.Foundation.Collections.IMapChangedEventArgs<HSTRING>";
+		mi_Interfaces["9939F4DF-050A-4C0F-AA60-77075F9C4777"] = "ABI.Windows.Foundation.Collections.IMapChangedEventArgs<K>";
 		mi_Interfaces["64F0C54C-4865-56BD-AC98-64A98451E362"] = "ABI.Windows.Foundation.Collections.IMapView<enum ABI.Windows.Devices.Sensors.PedometerStepKind, ABI.Windows.Devices.Sensors.PedometerReading*>";
 		mi_Interfaces["2C08602F-40B1-5E97-AE21-5C04D7FB829C"] = "ABI.Windows.Foundation.Collections.IMapView<GUID, ABI.Windows.ApplicationModel.Background.BackgroundTaskRegistration*>";
 		mi_Interfaces["78C880F6-A7DC-5172-89DA-7749FC82AA82"] = "ABI.Windows.Foundation.Collections.IMapView<GUID, ABI.Windows.ApplicationModel.Background.IBackgroundTaskRegistration*>";
@@ -3619,9 +3631,11 @@ public class Debugging
 		mi_Interfaces["AC7F26F2-FEB7-5B2A-8AC4-345BC62CAEDE"] = "ABI.Windows.Foundation.Collections.IMapView<HSTRING, HSTRING>";
 		mi_Interfaces["BB78502A-F79D-54FA-92C9-90C5039FDF7E"] = "ABI.Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>";
 		mi_Interfaces["EFE76D10-CB60-50AD-8A4F-6885CD6212A1"] = "ABI.Windows.Foundation.Collections.IMapView<IInspectable*, IInspectable*>";
+		mi_Interfaces["E480CE40-A338-4ADA-ADCF-272272E48CB9"] = "ABI.Windows.Foundation.Collections.IMapView<K, V>";
 		mi_Interfaces["57DC41E6-8B4D-5910-9703-D7C668436852"] = "ABI.Windows.Foundation.Collections.IMapView<UINT32, ABI.Windows.Storage.Streams.IBuffer*>";
 		mi_Interfaces["1E036276-2F60-55F6-B7F3-F86079E6900B"] = "ABI.Windows.Foundation.Collections.IObservableMap<HSTRING, HSTRING>";
 		mi_Interfaces["236AAC9D-FB12-5C4D-A41C-9E445FB4D7EC"] = "ABI.Windows.Foundation.Collections.IObservableMap<HSTRING, IInspectable*>";
+		mi_Interfaces["65DF2BF5-BF39-41B5-AEBC-5A9D865E472B"] = "ABI.Windows.Foundation.Collections.IObservableMap<K, V>";
 		mi_Interfaces["E885956C-72C1-514F-AD9A-2943B880AE13"] = "ABI.Windows.Foundation.Collections.IObservableVector<ABI.Windows.ApplicationModel.Search.Core.SearchSuggestion*>";
 		mi_Interfaces["98EBEBA8-6659-5AF2-BE4F-32FDEEDE3B77"] = "ABI.Windows.Foundation.Collections.IObservableVector<ABI.Windows.Media.Core.TimedMetadataTrack*>";
 		mi_Interfaces["95E6C852-6E9C-50A9-8935-054320242945"] = "ABI.Windows.Foundation.Collections.IObservableVector<ABI.Windows.Media.Core.TimedTextSource*>";
@@ -3631,6 +3645,7 @@ public class Debugging
 		mi_Interfaces["D5644006-717D-512D-8785-B48C17E73468"] = "ABI.Windows.Foundation.Collections.IObservableVector<ABI.Windows.UI.Xaml.Controls.ICommandBarElement*>";
 		mi_Interfaces["FAC6F4D2-96FD-5CEB-80BF-46AC6529FC65"] = "ABI.Windows.Foundation.Collections.IObservableVector<ABI.Windows.UI.Xaml.DependencyObject*>";
 		mi_Interfaces["7B81C56A-0985-518D-BAA9-0DA9AE009F65"] = "ABI.Windows.Foundation.Collections.IObservableVector<IInspectable*>";
+		mi_Interfaces["5917EB53-50B4-4A0D-B309-65862B3F1DBC"] = "ABI.Windows.Foundation.Collections.IObservableVector<T>";
 		mi_Interfaces["8A43ED9F-F4E6-4421-ACF9-1DAB2986820C"] = "ABI.Windows.Foundation.Collections.IPropertySet";
 		mi_Interfaces["1EE3A40E-00E5-52ED-B2AA-FB70F99813B7"] = "ABI.Windows.Foundation.Collections.IVector<__FIMapView_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue*>";
 		mi_Interfaces["38039511-50FE-5F79-915C-74A775A60779"] = "ABI.Windows.Foundation.Collections.IVector<ABI.Microsoft.Diagnostics.AppAnalysis.EtwEvent*>";
@@ -3846,6 +3861,7 @@ public class Debugging
 		mi_Interfaces["C73CEEF0-854A-5947-9E7C-527E3915D335"] = "ABI.Windows.Foundation.Collections.IVector<struct ABI.Windows.Networking.BackgroundTransfer.BackgroundTransferFileRange>";
 		mi_Interfaces["D8EA401B-47B3-5254-84F4-EEA10C4CF068"] = "ABI.Windows.Foundation.Collections.IVector<struct ABI.Windows.Storage.Search.SortEntry>";
 		mi_Interfaces["EE9D4CDA-0750-5C1F-93AA-59ADD8C1421B"] = "ABI.Windows.Foundation.Collections.IVector<struct ABI.Windows.UI.Xaml.Documents.TextRange>";
+		mi_Interfaces["913337E9-11A1-4345-A3A2-4E7F956E222D"] = "ABI.Windows.Foundation.Collections.IVector<T>";
 		mi_Interfaces["534832ED-2A03-5604-890D-5A928CD427B9"] = "ABI.Windows.Foundation.Collections.IVector<UINT32>";
 		mi_Interfaces["575933DF-34FE-4480-AF15-07691F3D5D9B"] = "ABI.Windows.Foundation.Collections.IVectorChangedEventArgs";
 		mi_Interfaces["172A655B-B3B8-5EAE-BC2E-A6A1F1708B4B"] = "ABI.Windows.Foundation.Collections.IVectorView<__FIMapView_2_HSTRING_IInspectable*>";
@@ -4411,11 +4427,13 @@ public class Debugging
 		mi_Interfaces["823C7604-B37B-5465-A169-29497893CDB9"] = "ABI.Windows.Foundation.Collections.IVectorView<struct ABI.Windows.Storage.Search.SortEntry>";
 		mi_Interfaces["F49E7371-B31A-5620-A42E-7E969003F0FF"] = "ABI.Windows.Foundation.Collections.IVectorView<struct ABI.Windows.UI.WindowId>";
 		mi_Interfaces["C824D1D0-771A-5123-90CC-52281F0F287A"] = "ABI.Windows.Foundation.Collections.IVectorView<struct ABI.Windows.UI.Xaml.Documents.TextRange>";
+		mi_Interfaces["BBE1FA4C-B0E3-4583-BAEF-1F1B2E483E56"] = "ABI.Windows.Foundation.Collections.IVectorView<T>";
 		mi_Interfaces["9D0D0D9F-6A82-55A3-98C5-228499DF38F9"] = "ABI.Windows.Foundation.Collections.IVectorView<UINT16>";
 		mi_Interfaces["E5CE1A07-8D33-5007-BA64-7D2508CCF85C"] = "ABI.Windows.Foundation.Collections.IVectorView<UINT32>";
 		mi_Interfaces["23D156C7-7EF9-5096-AABA-1E6C9AB5CEB4"] = "ABI.Windows.Foundation.Collections.IVectorView<UINT64>";
 		mi_Interfaces["E2663F37-2E1B-500C-AD68-C3ED7A8F74C8"] = "ABI.Windows.Foundation.Collections.MapChangedEventHandler<HSTRING, HSTRING>";
 		mi_Interfaces["24F981E5-DDCA-538D-AADA-A59906084CF1"] = "ABI.Windows.Foundation.Collections.MapChangedEventHandler<HSTRING, IInspectable*>";
+		mi_Interfaces["179517F3-94EE-41F8-BDDC-768A895544F3"] = "ABI.Windows.Foundation.Collections.MapChangedEventHandler<K, V>";
 		mi_Interfaces["CB7B988B-468A-5EAE-AFE4-DF8B005F80AF"] = "ABI.Windows.Foundation.Collections.VectorChangedEventHandler<ABI.Windows.ApplicationModel.Search.Core.SearchSuggestion*>";
 		mi_Interfaces["BD1DC81C-23C4-5B4B-AC38-C5D34CDF34E4"] = "ABI.Windows.Foundation.Collections.VectorChangedEventHandler<ABI.Windows.Media.Core.TimedMetadataTrack*>";
 		mi_Interfaces["E12E6261-B198-56E0-9822-BA2D3BB6F8FE"] = "ABI.Windows.Foundation.Collections.VectorChangedEventHandler<ABI.Windows.Media.Core.TimedTextSource*>";
@@ -4425,6 +4443,7 @@ public class Debugging
 		mi_Interfaces["20B884E1-C1DA-5332-B801-4F1C21744AC8"] = "ABI.Windows.Foundation.Collections.VectorChangedEventHandler<ABI.Windows.UI.Xaml.Controls.ICommandBarElement*>";
 		mi_Interfaces["B62DEC93-A7A5-5FF5-B2D2-6BD20CA0BD4D"] = "ABI.Windows.Foundation.Collections.VectorChangedEventHandler<ABI.Windows.UI.Xaml.DependencyObject*>";
 		mi_Interfaces["B423A801-D35E-56B9-813B-00889536CB98"] = "ABI.Windows.Foundation.Collections.VectorChangedEventHandler<IInspectable*>";
+		mi_Interfaces["0C051752-9FBF-4C70-AA0C-0E4C82D9A761"] = "ABI.Windows.Foundation.Collections.VectorChangedEventHandler<T>";
 		mi_Interfaces["50850B26-267E-451B-A890-AB6A370245EE"] = "ABI.Windows.Foundation.Diagnostics.IAsyncCausalityTracerStatics";
 		mi_Interfaces["378CBB01-2CC9-428F-8C55-2C990D463E8F"] = "ABI.Windows.Foundation.Diagnostics.IErrorDetails";
 		mi_Interfaces["B7703750-0B1D-46C8-AA0E-4B8178E4FCE9"] = "ABI.Windows.Foundation.Diagnostics.IErrorDetailsStatics";
@@ -4448,7 +4467,9 @@ public class Debugging
 		mi_Interfaces["4E937EE5-58FD-45E0-8C2F-A132EFF95C1E"] = "ABI.Windows.Foundation.Diagnostics.ILoggingSessionFactory";
 		mi_Interfaces["65F16C35-E388-4E26-B17A-F51CD3A83916"] = "ABI.Windows.Foundation.Diagnostics.ILoggingTarget";
 		mi_Interfaces["410B7711-FF3B-477F-9C9A-D2EFDA302DC3"] = "ABI.Windows.Foundation.Diagnostics.ITracingStatusChangedEventArgs";
+		mi_Interfaces["9DE1C535-6AE1-11E0-84E1-18A905BCC53F"] = "ABI.Windows.Foundation.EventHandler<T>";
 		mi_Interfaces["9BBCAE23-3DD6-49C3-B63C-1C587E7A6A67"] = "ABI.Windows.Foundation.IActivatableClassRegistration";
+		mi_Interfaces["00000035-0000-0000-C000-000000000046"] = "ABI.Windows.Foundation.IActivationFactory";
 		mi_Interfaces["5A648006-843A-4DA9-865B-9D26E5DFAD7B"] = "ABI.Windows.Foundation.IAsyncAction";
 		mi_Interfaces["A4ED5C81-76C9-40BD-8BE6-B1D90FB20AE7"] = "ABI.Windows.Foundation.IAsyncActionCompletedHandler";
 		mi_Interfaces["44825C7C-0DA9-5691-B2B4-914F231EECED"] = "ABI.Windows.Foundation.IAsyncActionProgressHandler<double>";
@@ -4456,10 +4477,12 @@ public class Debugging
 		mi_Interfaces["55E233CA-F243-5AE2-853B-F9CC7C0AE0CF"] = "ABI.Windows.Foundation.IAsyncActionProgressHandler<UINT64>";
 		mi_Interfaces["4F1430A6-A825-56CA-B047-1A9BAD52BA67"] = "ABI.Windows.Foundation.IAsyncActionWithProgress<double>";
 		mi_Interfaces["B7EB83F5-A746-50F2-B91F-31803161CCC7"] = "ABI.Windows.Foundation.IAsyncActionWithProgress<struct ABI.Windows.Web.Syndication.TransferProgress>";
+		mi_Interfaces["1F6DB258-E803-48A1-9546-EB7353398884"] = "ABI.Windows.Foundation.IAsyncActionWithProgress<TProgress>";
 		mi_Interfaces["43F713D0-C49D-5E55-AEBF-AF395768351E"] = "ABI.Windows.Foundation.IAsyncActionWithProgress<UINT64>";
 		mi_Interfaces["94D64AC6-4491-53EF-8BE8-36481F3FF1E8"] = "ABI.Windows.Foundation.IAsyncActionWithProgressCompletedHandler<double>";
 		mi_Interfaces["F1C031C8-90BF-5CAE-ADF6-155B4AEDFB60"] = "ABI.Windows.Foundation.IAsyncActionWithProgressCompletedHandler<struct ABI.Windows.Web.Syndication.TransferProgress>";
 		mi_Interfaces["E6FF857B-F160-571A-A934-2C61F98C862D"] = "ABI.Windows.Foundation.IAsyncActionWithProgressCompletedHandler<UINT64>";
+		mi_Interfaces["00000036-0000-0000-C000-000000000046"] = "ABI.Windows.Foundation.IAsyncInfo";
 		mi_Interfaces["84E30B9C-351D-5FCB-8B0A-BC145407F915"] = "ABI.Windows.Foundation.IAsyncOperation<__FIMap_2_HSTRING_HSTRING*>";
 		mi_Interfaces["127E39C7-07C1-58E5-B48E-3A4729839FEC"] = "ABI.Windows.Foundation.IAsyncOperation<__FIMap_2_HSTRING_IInspectable*>";
 		mi_Interfaces["817944B6-F046-5391-BB0B-4CC34D8040F3"] = "ABI.Windows.Foundation.IAsyncOperation<__FIMapView_2_HSTRING_HSTRING*>";
@@ -5081,6 +5104,7 @@ public class Debugging
 		mi_Interfaces["E2B45A37-E1C1-5E80-8962-A134D7F3557C"] = "ABI.Windows.Foundation.IAsyncOperation<struct ABI.Windows.Media.Streaming.PositionInformation>";
 		mi_Interfaces["F99E7D9C-2274-5F3D-89E7-F5F862BA0334"] = "ABI.Windows.Foundation.IAsyncOperation<struct ABI.Windows.Media.Streaming.TransportInformation>";
 		mi_Interfaces["C788089D-37AB-5BA2-B865-5A309ACDFC4D"] = "ABI.Windows.Foundation.IAsyncOperation<struct ABI.Windows.UI.Xaml.Data.LoadMoreItemsResult>";
+		mi_Interfaces["9FC2B0BB-E446-44E2-AA61-9CAB8F636AF2"] = "ABI.Windows.Foundation.IAsyncOperation<TResult>";
 		mi_Interfaces["EF60385F-BE78-584B-AAEF-7829ADA2B0DE"] = "ABI.Windows.Foundation.IAsyncOperation<UINT32>";
 		mi_Interfaces["2A70D630-0767-5F0A-A1C2-DEB08126E26E"] = "ABI.Windows.Foundation.IAsyncOperation<UINT64>";
 		mi_Interfaces["39BB624E-B5C6-5785-BA46-3F45AAF3EF35"] = "ABI.Windows.Foundation.IAsyncOperationCompletedHandler<__FIMap_2_HSTRING_HSTRING*>";
@@ -5778,6 +5802,7 @@ public class Debugging
 		mi_Interfaces["272EEC20-4B64-5D53-A644-F9917B3D19D8"] = "ABI.Windows.Foundation.IAsyncOperationWithProgress<enum ABI.Windows.Media.Transcoding.TranscodeFailureReason, double>";
 		mi_Interfaces["91ECBE45-E889-5518-BD8D-C5BDE163109B"] = "ABI.Windows.Foundation.IAsyncOperationWithProgress<HSTRING, struct ABI.Windows.Web.Http.HttpProgress>";
 		mi_Interfaces["C8BBCB29-6B64-5CE2-A831-038F6E02199E"] = "ABI.Windows.Foundation.IAsyncOperationWithProgress<HSTRING, UINT64>";
+		mi_Interfaces["B5D036D7-E297-498F-BA60-0289E76E23DD"] = "ABI.Windows.Foundation.IAsyncOperationWithProgress<TResult, TProgress>";
 		mi_Interfaces["ECCB574A-C684-5572-A679-6B0842CFB57F"] = "ABI.Windows.Foundation.IAsyncOperationWithProgress<UINT32, UINT32>";
 		mi_Interfaces["8F1DB6E3-6556-5516-825C-1021EE27CD0C"] = "ABI.Windows.Foundation.IAsyncOperationWithProgress<UINT64, UINT64>";
 		mi_Interfaces["C0454CFC-2F2F-5E0C-8DE9-58B9E82A03BA"] = "ABI.Windows.Foundation.IAsyncOperationWithProgressCompletedHandler<__FIVectorView_1_Windows__CDevices__CSms__CISmsMessage*, int>";
@@ -5862,6 +5887,7 @@ public class Debugging
 		mi_Interfaces["EC734A06-0401-4317-BAC1-3B7E207242E3"] = "ABI.Windows.Foundation.IExeServerRegistration";
 		mi_Interfaces["4EDB8EE2-96DD-49A7-94F7-4607DDAB8E3C"] = "ABI.Windows.Foundation.IGetActivationFactory";
 		mi_Interfaces["59C7966B-AE52-5283-AD7F-A1B9E9678ADD"] = "ABI.Windows.Foundation.IGuidHelperStatics";
+		mi_Interfaces["AF86E2E0-B12D-4C6A-9C5A-D7AA65101E90"] = "ABI.Windows.Foundation.IInspectable";
 		mi_Interfaces["FBC4DD2A-245B-11E4-AF98-689423260CF8"] = "ABI.Windows.Foundation.IMemoryBuffer";
 		mi_Interfaces["FBC4DD2B-245B-11E4-AF98-689423260CF8"] = "ABI.Windows.Foundation.IMemoryBufferFactory";
 		mi_Interfaces["FBC4DD29-245B-11E4-AF98-689423260CF8"] = "ABI.Windows.Foundation.IMemoryBufferReference";
@@ -5912,8 +5938,10 @@ public class Debugging
 		mi_Interfaces["44DD686B-C7D8-582C-91C2-D98E604DCFD4"] = "ABI.Windows.Foundation.IReference<struct ABI.Windows.Perception.Spatial.SpatialRay>";
 		mi_Interfaces["AB8E5D11-B0C1-5A21-95AE-F16BF3A37624"] = "ABI.Windows.Foundation.IReference<struct ABI.Windows.UI.Color>";
 		mi_Interfaces["A19F7BA8-D8CD-5DF2-AB44-FEFD26644484"] = "ABI.Windows.Foundation.IReference<struct ABI.Windows.UI.Xaml.Thickness>";
+		mi_Interfaces["61C17706-2D65-11E0-9AE8-D48564015472"] = "ABI.Windows.Foundation.IReference<T>";
 		mi_Interfaces["513EF3AF-E784-5325-A91E-97C2B8111CF3"] = "ABI.Windows.Foundation.IReference<UINT32>";
 		mi_Interfaces["6755E376-53BB-568B-A11D-17239868309E"] = "ABI.Windows.Foundation.IReference<UINT64>";
+		mi_Interfaces["61C17707-2D65-11E0-9AE8-D48564015472"] = "ABI.Windows.Foundation.IReferenceArray<T>";
 		mi_Interfaces["96369F54-8EB6-48F0-ABCE-C1B211E627C3"] = "ABI.Windows.Foundation.IStringable";
 		mi_Interfaces["79971E44-6520-58A7-B3A2-3B596D54E4E0"] = "ABI.Windows.Foundation.ITypedEventHandler<ABI.Microsoft.Diagnostics.AppAnalysis.IRule*, ABI.Microsoft.Diagnostics.AppAnalysis.RuleTriggeredEventArgs*>";
 		mi_Interfaces["7725B2A5-287D-5ED2-A789-2A6A2673C7FE"] = "ABI.Windows.Foundation.ITypedEventHandler<ABI.Windows.ApplicationModel.Activation.SplashScreen*, IInspectable*>";
@@ -6787,6 +6815,7 @@ public class Debugging
 		mi_Interfaces["26AABF41-A0FD-5E66-B188-6C74182D00CD"] = "ABI.Windows.Foundation.ITypedEventHandler<IInspectable*, ABI.Windows.UI.Core.PointerEventArgs*>";
 		mi_Interfaces["C76E9D25-6A96-58FD-874F-AE52BD603AF8"] = "ABI.Windows.Foundation.ITypedEventHandler<IInspectable*, ABI.Windows.UI.Core.TouchHitTestingEventArgs*>";
 		mi_Interfaces["C7E65CE2-FAD5-5E3B-9C58-186CA8C1DD57"] = "ABI.Windows.Foundation.ITypedEventHandler<IInspectable*, IInspectable*>";
+		mi_Interfaces["00000000-0000-0000-C000-000000000046"] = "ABI.Windows.Foundation.IUnknown";
 		mi_Interfaces["C1D432BA-C824-4452-A7FD-512BC3BBE9A1"] = "ABI.Windows.Foundation.IUriEscapeStatics";
 		mi_Interfaces["9E365E57-48B2-4160-956F-C7385120BBFC"] = "ABI.Windows.Foundation.IUriRuntimeClass";
 		mi_Interfaces["44A9796F-723E-4FDF-A218-033E75B0C084"] = "ABI.Windows.Foundation.IUriRuntimeClassFactory";
@@ -6795,6 +6824,7 @@ public class Debugging
 		mi_Interfaces["D45A0451-F225-4542-9296-0E1DF5D254DF"] = "ABI.Windows.Foundation.IWwwFormUrlDecoderRuntimeClass";
 		mi_Interfaces["5B8C6B3D-24AE-41B5-A1BF-F0C3D544845B"] = "ABI.Windows.Foundation.IWwwFormUrlDecoderRuntimeClassFactory";
 		mi_Interfaces["997439FE-F681-4A11-B416-C13A47E8BA36"] = "ABI.Windows.Foundation.Metadata.IApiInformationStatics";
+		mi_Interfaces["9DE1C534-6AE1-11E0-84E1-18A905BCC53F"] = "ABI.Windows.Foundation.TypedEventHandler<TSender, TResult>";
 		mi_Interfaces["69A0AE5E-758E-4CBE-ACE6-62155FE9126F"] = "ABI.Windows.Gaming.Input.Custom.ICustomGameControllerFactory";
 		mi_Interfaces["36CB66E3-D0A1-4986-A24C-40B137DEBA9E"] = "ABI.Windows.Gaming.Input.Custom.IGameControllerFactoryManagerStatics";
 		mi_Interfaces["EACE5644-19DF-4115-B32A-2793E2AEA3BB"] = "ABI.Windows.Gaming.Input.Custom.IGameControllerFactoryManagerStatics2";
@@ -7175,6 +7205,8 @@ public class Debugging
 		mi_Interfaces["69FBDBBA-B12E-429B-8386-DF5284F6E80F"] = "ABI.Windows.Graphics.Printing3D.IPrinting3DTexture2CoordMaterialGroup2";
 		mi_Interfaces["CBB049B0-468A-4C6F-B2A2-8EB8BA8DEA48"] = "ABI.Windows.Graphics.Printing3D.IPrinting3DTexture2CoordMaterialGroupFactory";
 		mi_Interfaces["A70DF32D-6AB1-44AE-BC45-A27382C0D38C"] = "ABI.Windows.Graphics.Printing3D.IPrinting3DTextureResource";
+		mi_Interfaces["DE27A01F-B561-4531-A278-FD012679EF1E"] = "ABI.Windows.Internal.Holographic.UI.IHolographicViewPropertiesFactory";
+		mi_Interfaces["343BAA78-E34F-466C-9FFA-81AF5CE4CD34"] = "ABI.Windows.Internal.Security.SmartScreen.IAppReputationServiceFactory";
 		mi_Interfaces["74D10432-2E99-4000-9A3A-64307E858129"] = "ABI.Windows.Management.Core.IApplicationDataManager";
 		mi_Interfaces["1E1862E3-698E-49A1-9752-DEE94925B9B3"] = "ABI.Windows.Management.Core.IApplicationDataManagerStatics";
 		mi_Interfaces["05CEE018-F68F-422B-95A4-66679EC77FC0"] = "ABI.Windows.Management.Deployment.IAddPackageOptions";
@@ -9641,6 +9673,14 @@ public class Debugging
 		mi_Interfaces["BF9918EA-D801-4564-A495-B1E84F8AD085"] = "ABI.Windows.UI.Core.IVisibilityChangedEventArgs";
 		mi_Interfaces["179D65E7-4658-4CB6-AA13-41D094EA255E"] = "ABI.Windows.UI.Core.IWindowActivatedEventArgs";
 		mi_Interfaces["5A200EC7-0426-47DC-B86C-6F475915E451"] = "ABI.Windows.UI.Core.IWindowSizeChangedEventArgs";
+		mi_Interfaces["F0190610-05AF-4250-B96A-A74EDEF77A0D"] = "ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamCleanupRequestedEventArgs";
+		mi_Interfaces["661F4165-FE71-44AF-9568-6CC7CF29CD4C"] = "ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamCommandInvokedEventArgs";
+		mi_Interfaces["8959C9B9-02FC-4D1D-8921-D61E7766CB89"] = "ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamDeviceCredentials";
+		mi_Interfaces["10B149E1-B6F1-4CA7-B4CE-2C66A4A64699"] = "ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamEndMeetingRequestedEventArgs";
+		mi_Interfaces["421E6ADB-98D7-41AE-BA49-6CAF559B8F5A"] = "ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamJoinMeetingRequestedEventArgs";
+		mi_Interfaces["6F616677-02AE-49A0-AA50-862D078CF9B1"] = "ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamView";
+		mi_Interfaces["BD44B2A2-0D77-416D-A370-9EA5ECE46229"] = "ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamView2";
+		mi_Interfaces["FE241233-D49C-49EE-B798-EC31D9543938"] = "ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamViewStatics";
 		mi_Interfaces["A4F6E665-365E-5FDE-87A5-9543C3A15AA8"] = "ABI.Windows.UI.Core.Preview.ICoreAppWindowPreview";
 		mi_Interfaces["33AC21BE-423B-5DB6-8A8E-4DC87353B75B"] = "ABI.Windows.UI.Core.Preview.ICoreAppWindowPreviewStatics";
 		mi_Interfaces["83D00DE1-CBE5-4F31-8414-361DA046518F"] = "ABI.Windows.UI.Core.Preview.ISystemNavigationCloseRequestedPreviewEventArgs";
@@ -10074,6 +10114,21 @@ public class Debugging
 		mi_Interfaces["595C97A5-F8F6-41CF-B0FB-AACDB81FD5F6"] = "ABI.Windows.UI.ViewManagement.IUIViewSettingsStatics";
 		mi_Interfaces["878FCD3A-0B99-42C9-84D0-D3F1D403554B"] = "ABI.Windows.UI.ViewManagement.IViewModePreferences";
 		mi_Interfaces["69B60A65-5DE5-40D8-8306-3833DF7A2274"] = "ABI.Windows.UI.ViewManagement.IViewModePreferencesStatics";
+		mi_Interfaces["A4FC0016-DBE5-41AD-8D7B-14698BD6911D"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBar";
+		mi_Interfaces["858F4F45-08D8-4A46-81EC-00015B0B1C6C"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarBitmapIcon";
+		mi_Interfaces["F3F7D78A-7673-444A-BE62-AC12D31C2231"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarBitmapIconFactory";
+		mi_Interfaces["86E7824A-E3D5-4EB6-B2FF-8F018A172105"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarConfirmationButton";
+		mi_Interfaces["C9069EC2-284A-4633-8AAD-637A27E282C3"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarElement";
+		mi_Interfaces["D587655D-2014-42BE-969A-7D14CA6C8A49"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarIcon";
+		mi_Interfaces["8F1BC93A-3A7C-4842-A0CF-AFF6EA308586"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarIconButton";
+		mi_Interfaces["304EDBDD-E741-41EF-BDC4-A45CEA2A4F70"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarItemInvokedEventArgs";
+		mi_Interfaces["FBF1E2F6-3029-4719-8378-92F82B87AF1E"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarSizeChangedEventArgs";
+		mi_Interfaces["1449CDB9-A506-45BE-8F42-B2837E2FE0C9"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarStatics";
+		mi_Interfaces["D4935477-FD26-46ED-8658-1A3F4400E7B3"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarSymbolIcon";
+		mi_Interfaces["51BE1A1F-3730-429E-B622-14E2B7BF6A07"] = "ABI.Windows.UI.WebUI.Core.IWebUICommandBarSymbolIconFactory";
+		mi_Interfaces["435387C8-4DD0-4C52-9489-D390CE7721D2"] = "ABI.Windows.UI.WebUI.Core.MenuClosedEventHandler";
+		mi_Interfaces["18DC0AD3-678F-4C19-8963-CC1C49A5EF9E"] = "ABI.Windows.UI.WebUI.Core.MenuOpenedEventHandler";
+		mi_Interfaces["D49CFE3C-DD2E-4C28-B627-303A7F911AF5"] = "ABI.Windows.UI.WebUI.Core.SizeChangedEventHandler";
 		mi_Interfaces["C3BD1978-A431-49D8-A76A-395A4E03DCF3"] = "ABI.Windows.UI.WebUI.IActivatedDeferral";
 		mi_Interfaces["CA6D5F74-63C2-44A6-B97B-D9A03C20BC9B"] = "ABI.Windows.UI.WebUI.IActivatedEventArgsDeferral";
 		mi_Interfaces["50F1E730-C5D1-4B6B-9ADB-8A11756BE29C"] = "ABI.Windows.UI.WebUI.IActivatedEventHandler";
@@ -11645,6 +11700,7 @@ public class Debugging
 		mi_Interfaces["843BC4C3-C105-59FE-A3D1-373C1D3E6FBC"] = "ABI.Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics3";
 		mi_Interfaces["56096C31-1AA0-5288-8818-6E74A2DCAFF5"] = "ABI.Windows.UI.Xaml.Hosting.IWindowsXamlManager";
 		mi_Interfaces["28258A12-7D82-505B-B210-712B04A58882"] = "ABI.Windows.UI.Xaml.Hosting.IWindowsXamlManagerStatics";
+		mi_Interfaces["3EAD2336-B073-456F-BCAF-82587EB63487"] = "ABI.Windows.UI.Xaml.Hosting.IXamlIslandFactory";
 		mi_Interfaces["FBB93BB5-1496-5A80-AC00-E757359755E6"] = "ABI.Windows.UI.Xaml.Hosting.IXamlSourceFocusNavigationRequest";
 		mi_Interfaces["E746AB8F-B4EF-5390-97E5-CC0A2779C574"] = "ABI.Windows.UI.Xaml.Hosting.IXamlSourceFocusNavigationRequestFactory";
 		mi_Interfaces["88D55A5F-9603-5D8F-9CC7-D1C4070D9801"] = "ABI.Windows.UI.Xaml.Hosting.IXamlSourceFocusNavigationResult";
@@ -16607,6 +16663,7 @@ public class Debugging
 		mi_Interfaces["1E00486A-78DD-11D2-8DD3-006097C9A2B2"] = "IBufferingTime";
 		mi_Interfaces["D2FFD834-958B-426D-8470-2A13879C6A91"] = "IBurnVerification";
 		mi_Interfaces["58925FB9-7C5E-4684-833B-4A04E1286690"] = "ICacheProvider";
+		mi_Interfaces["0A299774-3E4E-FC42-1D9D-72CEE105CA57"] = "ICallbackWithNoReentrancyToApplicationSTA";
 		mi_Interfaces["1C733A30-2A1C-11CE-ADE5-00AA0044773D"] = "ICallFactory";
 		mi_Interfaces["D573B4B0-894E-11D2-B8B6-00C04FB9618A"] = "ICallFrame";
 		mi_Interfaces["FD5E0843-FC91-11D0-97D7-00C04FB9618A"] = "ICallFrameEvents";
@@ -21988,6 +22045,10 @@ public class Debugging
 		mi_Interfaces["75D69CC5-D2BF-4943-876E-B45B62A6CC66"] = "IsSynchronizedInputPatternAvailable_Property_GUID";
 		mi_Interfaces["CB83575F-45C2-4048-9C76-159715A139DF"] = "IsTablePatternAvailable_Property_GUID";
 		mi_Interfaces["4CD19ADA-25A5-4A32-B3B7-347BEE5BE36B"] = "IStartMenuPinnedList";
+		mi_Interfaces["17B0E613-942A-422D-904C-F90DC71A7DAE"] = "IStaticLifetime";
+
+		// The following GUID is ambiguous for IStaticLifetimeCollection and ABI.Windows.Foundation.Collections.IMap<HSTRING, IInspectable*>
+		mi_Interfaces["1B0D3570-0877-5EC2-8A2C-3B9539506ACA"] = "IStaticLifetimeCollection";
 		mi_Interfaces["6F10711F-729B-41E5-93B8-F21D0F818DF1"] = "IStaticPortMapping";
 		mi_Interfaces["CD1F3E77-66D6-4664-82C7-36DBB641D0F1"] = "IStaticPortMappingCollection";
 		mi_Interfaces["00000018-0000-0000-C000-000000000046"] = "IStdMarshalInfo";

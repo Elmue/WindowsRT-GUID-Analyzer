@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Xml>
 	<Title>All Interfaces - Windows GUID Database</Title>
-	<Comment>25623 interfaces automatically extracted from the Windows 11 (Build 22000) SDK header files (https://github.com/Elmue/WindowsRT-GUID-Analyzer)</Comment>
+	<Comment>25680 interfaces automatically extracted from the Windows 11 (Build 22000) SDK header files (https://github.com/Elmue/WindowsRT-GUID-Analyzer)</Comment>
 	<Interface GUID="36ADB6D9-DA1F-45D8-A499-86167E0F936B" Name="__MIDL___MIDL_itf_ctffunc_0000_0011_0001" />
 	<Interface GUID="8FB5F0CE-DFDD-4F0A-85B9-8988D8DD8FF2" Name="__MIDL___MIDL_itf_ctfutb_0000_0010_0001" />
 	<Interface GUID="D7803AF6-B018-4A42-AE48-B2D2319BCB05" Name="__MIDL___MIDL_itf_micaut_0000_0000_0001" />
@@ -2188,6 +2188,11 @@
 	<Interface GUID="A0E27C8B-50CB-4A58-9BCF-E472B99FBA04" Name="ABI.Windows.Devices.WiFiDirect.Services.IWiFiDirectServiceSessionRequest" />
 	<Interface GUID="74BDCC11-53D6-4999-B4F8-6C8ECC1771E7" Name="ABI.Windows.Devices.WiFiDirect.Services.IWiFiDirectServiceSessionRequestedEventArgs" />
 	<Interface GUID="7DB40045-FD74-4688-B725-5DCE86ACF233" Name="ABI.Windows.Devices.WiFiDirect.Services.IWiFiDirectServiceStatics" />
+	<Interface GUID="6D844858-0CFF-4590-AE89-95A5A5C8B4B8" Name="ABI.Windows.Foundation.AsyncActionProgressHandler&lt;TProgress&gt;" />
+	<Interface GUID="9C029F91-CC84-44FD-AC26-0A6C4E555281" Name="ABI.Windows.Foundation.AsyncActionWithProgressCompletedHandler&lt;TProgress&gt;" />
+	<Interface GUID="FCDCF02C-E5D8-4478-915A-4D90B74B83A5" Name="ABI.Windows.Foundation.AsyncOperationCompletedHandler&lt;TResult&gt;" />
+	<Interface GUID="55690902-0AAB-421A-8778-F8CE5026D758" Name="ABI.Windows.Foundation.AsyncOperationProgressHandler&lt;TResult, TProgress&gt;" />
+	<Interface GUID="E85DF41D-6AA7-46E3-A8E2-F009D840C627" Name="ABI.Windows.Foundation.AsyncOperationWithProgressCompletedHandler&lt;TResult, TProgress&gt;" />
 	<Interface GUID="E4A5D51B-0047-5C20-8A42-D265732E8117" Name="ABI.Windows.Foundation.Collections.IIterable&lt;__FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue*&gt;" />
 	<Interface GUID="AE44597E-D411-5B7F-BBEC-6A96C94A107A" Name="ABI.Windows.Foundation.Collections.IIterable&lt;__FIIterable_1_Windows__CFoundation__CPoint*&gt;" />
 	<Interface GUID="F3B20528-E3B3-5331-B2D0-0C2623AEE785" Name="ABI.Windows.Foundation.Collections.IIterable&lt;__FIKeyValuePair_2_GUID_IInspectable*&gt;" />
@@ -2839,6 +2844,7 @@
 	<Interface GUID="932EEF5E-2C2F-5EAE-929A-74E973B57C27" Name="ABI.Windows.Foundation.Collections.IIterable&lt;struct ABI.Windows.UI.Color&gt;" />
 	<Interface GUID="745698BF-22AD-5C0D-B0E0-07D35A1C9719" Name="ABI.Windows.Foundation.Collections.IIterable&lt;struct ABI.Windows.UI.WindowId&gt;" />
 	<Interface GUID="2AD42FDB-56DB-500B-8EA8-3D57EDFADFC6" Name="ABI.Windows.Foundation.Collections.IIterable&lt;struct ABI.Windows.UI.Xaml.Documents.TextRange&gt;" />
+	<Interface GUID="FAA585EA-6214-4217-AFDA-7F46DE5869B3" Name="ABI.Windows.Foundation.Collections.IIterable&lt;T&gt;" />
 	<Interface GUID="ECFA9A6F-FA2E-5345-B297-EFB4E8C6BE87" Name="ABI.Windows.Foundation.Collections.IIterable&lt;UINT16&gt;" />
 	<Interface GUID="421D4B91-B13B-5F37-AE54-B5249BD80539" Name="ABI.Windows.Foundation.Collections.IIterable&lt;UINT32&gt;" />
 	<Interface GUID="4B3A3229-7995-5F3C-B248-6C1F7E664F01" Name="ABI.Windows.Foundation.Collections.IIterable&lt;UINT64&gt;" />
@@ -3493,6 +3499,7 @@
 	<Interface GUID="C4310B12-7AC2-5E5B-B511-E546EEA473B4" Name="ABI.Windows.Foundation.Collections.IIterator&lt;struct ABI.Windows.UI.Color&gt;" />
 	<Interface GUID="BA0A30A1-C082-5671-AC07-7AAA4F269670" Name="ABI.Windows.Foundation.Collections.IIterator&lt;struct ABI.Windows.UI.WindowId&gt;" />
 	<Interface GUID="71F63622-C0FE-5423-914E-D319D25BCC84" Name="ABI.Windows.Foundation.Collections.IIterator&lt;struct ABI.Windows.UI.Xaml.Documents.TextRange&gt;" />
+	<Interface GUID="6A79E863-4300-459A-9966-CBB660963EE1" Name="ABI.Windows.Foundation.Collections.IIterator&lt;T&gt;" />
 	<Interface GUID="5738FC25-402B-5FC1-B1E4-0AA24EF652F1" Name="ABI.Windows.Foundation.Collections.IIterator&lt;UINT16&gt;" />
 	<Interface GUID="F06A2739-9443-5EF0-B284-DC5AFF3E7D10" Name="ABI.Windows.Foundation.Collections.IIterator&lt;UINT32&gt;" />
 	<Interface GUID="C473ED96-76E3-5FF2-9435-47FEEBFE9539" Name="ABI.Windows.Foundation.Collections.IIterator&lt;UINT64&gt;" />
@@ -3538,6 +3545,7 @@
 	<Interface GUID="60310303-49C5-52E6-ABC6-A9B36ECCC716" Name="ABI.Windows.Foundation.Collections.IKeyValuePair&lt;HSTRING, HSTRING&gt;" />
 	<Interface GUID="09335560-6C6B-5A26-9348-97B781132B20" Name="ABI.Windows.Foundation.Collections.IKeyValuePair&lt;HSTRING, IInspectable*&gt;" />
 	<Interface GUID="59E7AE0C-C29D-5AD6-BEF5-DEDB52A198E1" Name="ABI.Windows.Foundation.Collections.IKeyValuePair&lt;IInspectable*, IInspectable*&gt;" />
+	<Interface GUID="02B51929-C1C4-4A7E-8940-0312B5C18500" Name="ABI.Windows.Foundation.Collections.IKeyValuePair&lt;K, V&gt;" />
 	<Interface GUID="82A3A3B7-E04A-5395-8487-7F94F1508CE7" Name="ABI.Windows.Foundation.Collections.IKeyValuePair&lt;UINT32, ABI.Windows.Storage.Streams.IBuffer*&gt;" />
 	<Interface GUID="5EE3189C-7DBF-5998-AD07-5414FB82567C" Name="ABI.Windows.Foundation.Collections.IMap&lt;GUID, IInspectable*&gt;" />
 	<Interface GUID="E475CA9D-6AFB-5992-993E-53E6EF7A9ECD" Name="ABI.Windows.Foundation.Collections.IMap&lt;HSTRING, __FIVector_1_HSTRING*&gt;" />
@@ -3553,10 +3561,13 @@
 	<Interface GUID="4BA9AA1D-57AC-54DE-A807-B52E689BFC04" Name="ABI.Windows.Foundation.Collections.IMap&lt;HSTRING, ABI.Windows.UI.Composition.ICompositionAnimationBase*&gt;" />
 	<Interface GUID="41F50F14-9A3C-5240-B042-1BFF02E57028" Name="ABI.Windows.Foundation.Collections.IMap&lt;HSTRING, enum ABI.Windows.UI.Composition.Scenes.SceneAttributeSemantic&gt;" />
 	<Interface GUID="F6D1F700-49C2-52AE-8154-826F9908773C" Name="ABI.Windows.Foundation.Collections.IMap&lt;HSTRING, HSTRING&gt;" />
-	<Interface GUID="1B0D3570-0877-5EC2-8A2C-3B9539506ACA" Name="ABI.Windows.Foundation.Collections.IMap&lt;HSTRING, IInspectable*&gt;" />
+	<Interface GUID="1B0D3570-0877-5EC2-8A2C-3B9539506ACA" Name="ABI.Windows.Foundation.Collections.IMap&lt;HSTRING, IInspectable*&gt;"
+	           Warning="This GUID is ambiguous for IStaticLifetimeCollection and ABI.Windows.Foundation.Collections.IMap&lt;HSTRING, IInspectable*&gt;" />
 	<Interface GUID="F5F69427-55ED-5512-8429-D4F6626DFCDD" Name="ABI.Windows.Foundation.Collections.IMap&lt;IInspectable*, IInspectable*&gt;" />
+	<Interface GUID="3C2925FE-8519-45C1-AA79-197B6718C1C1" Name="ABI.Windows.Foundation.Collections.IMap&lt;K, V&gt;" />
 	<Interface GUID="5D2591DF-48C5-5734-9EF1-BD639B032007" Name="ABI.Windows.Foundation.Collections.IMap&lt;UINT32, ABI.Windows.Storage.Streams.IBuffer*&gt;" />
 	<Interface GUID="60141EFB-F2F9-5377-96FD-F8C60D9558B5" Name="ABI.Windows.Foundation.Collections.IMapChangedEventArgs&lt;HSTRING&gt;" />
+	<Interface GUID="9939F4DF-050A-4C0F-AA60-77075F9C4777" Name="ABI.Windows.Foundation.Collections.IMapChangedEventArgs&lt;K&gt;" />
 	<Interface GUID="64F0C54C-4865-56BD-AC98-64A98451E362" Name="ABI.Windows.Foundation.Collections.IMapView&lt;enum ABI.Windows.Devices.Sensors.PedometerStepKind, ABI.Windows.Devices.Sensors.PedometerReading*&gt;" />
 	<Interface GUID="2C08602F-40B1-5E97-AE21-5C04D7FB829C" Name="ABI.Windows.Foundation.Collections.IMapView&lt;GUID, ABI.Windows.ApplicationModel.Background.BackgroundTaskRegistration*&gt;" />
 	<Interface GUID="78C880F6-A7DC-5172-89DA-7749FC82AA82" Name="ABI.Windows.Foundation.Collections.IMapView&lt;GUID, ABI.Windows.ApplicationModel.Background.IBackgroundTaskRegistration*&gt;" />
@@ -3599,9 +3610,11 @@
 	<Interface GUID="AC7F26F2-FEB7-5B2A-8AC4-345BC62CAEDE" Name="ABI.Windows.Foundation.Collections.IMapView&lt;HSTRING, HSTRING&gt;" />
 	<Interface GUID="BB78502A-F79D-54FA-92C9-90C5039FDF7E" Name="ABI.Windows.Foundation.Collections.IMapView&lt;HSTRING, IInspectable*&gt;" />
 	<Interface GUID="EFE76D10-CB60-50AD-8A4F-6885CD6212A1" Name="ABI.Windows.Foundation.Collections.IMapView&lt;IInspectable*, IInspectable*&gt;" />
+	<Interface GUID="E480CE40-A338-4ADA-ADCF-272272E48CB9" Name="ABI.Windows.Foundation.Collections.IMapView&lt;K, V&gt;" />
 	<Interface GUID="57DC41E6-8B4D-5910-9703-D7C668436852" Name="ABI.Windows.Foundation.Collections.IMapView&lt;UINT32, ABI.Windows.Storage.Streams.IBuffer*&gt;" />
 	<Interface GUID="1E036276-2F60-55F6-B7F3-F86079E6900B" Name="ABI.Windows.Foundation.Collections.IObservableMap&lt;HSTRING, HSTRING&gt;" />
 	<Interface GUID="236AAC9D-FB12-5C4D-A41C-9E445FB4D7EC" Name="ABI.Windows.Foundation.Collections.IObservableMap&lt;HSTRING, IInspectable*&gt;" />
+	<Interface GUID="65DF2BF5-BF39-41B5-AEBC-5A9D865E472B" Name="ABI.Windows.Foundation.Collections.IObservableMap&lt;K, V&gt;" />
 	<Interface GUID="E885956C-72C1-514F-AD9A-2943B880AE13" Name="ABI.Windows.Foundation.Collections.IObservableVector&lt;ABI.Windows.ApplicationModel.Search.Core.SearchSuggestion*&gt;" />
 	<Interface GUID="98EBEBA8-6659-5AF2-BE4F-32FDEEDE3B77" Name="ABI.Windows.Foundation.Collections.IObservableVector&lt;ABI.Windows.Media.Core.TimedMetadataTrack*&gt;" />
 	<Interface GUID="95E6C852-6E9C-50A9-8935-054320242945" Name="ABI.Windows.Foundation.Collections.IObservableVector&lt;ABI.Windows.Media.Core.TimedTextSource*&gt;" />
@@ -3611,6 +3624,7 @@
 	<Interface GUID="D5644006-717D-512D-8785-B48C17E73468" Name="ABI.Windows.Foundation.Collections.IObservableVector&lt;ABI.Windows.UI.Xaml.Controls.ICommandBarElement*&gt;" />
 	<Interface GUID="FAC6F4D2-96FD-5CEB-80BF-46AC6529FC65" Name="ABI.Windows.Foundation.Collections.IObservableVector&lt;ABI.Windows.UI.Xaml.DependencyObject*&gt;" />
 	<Interface GUID="7B81C56A-0985-518D-BAA9-0DA9AE009F65" Name="ABI.Windows.Foundation.Collections.IObservableVector&lt;IInspectable*&gt;" />
+	<Interface GUID="5917EB53-50B4-4A0D-B309-65862B3F1DBC" Name="ABI.Windows.Foundation.Collections.IObservableVector&lt;T&gt;" />
 	<Interface GUID="8A43ED9F-F4E6-4421-ACF9-1DAB2986820C" Name="ABI.Windows.Foundation.Collections.IPropertySet" />
 	<Interface GUID="1EE3A40E-00E5-52ED-B2AA-FB70F99813B7" Name="ABI.Windows.Foundation.Collections.IVector&lt;__FIMapView_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue*&gt;" />
 	<Interface GUID="38039511-50FE-5F79-915C-74A775A60779" Name="ABI.Windows.Foundation.Collections.IVector&lt;ABI.Microsoft.Diagnostics.AppAnalysis.EtwEvent*&gt;" />
@@ -3826,6 +3840,7 @@
 	<Interface GUID="C73CEEF0-854A-5947-9E7C-527E3915D335" Name="ABI.Windows.Foundation.Collections.IVector&lt;struct ABI.Windows.Networking.BackgroundTransfer.BackgroundTransferFileRange&gt;" />
 	<Interface GUID="D8EA401B-47B3-5254-84F4-EEA10C4CF068" Name="ABI.Windows.Foundation.Collections.IVector&lt;struct ABI.Windows.Storage.Search.SortEntry&gt;" />
 	<Interface GUID="EE9D4CDA-0750-5C1F-93AA-59ADD8C1421B" Name="ABI.Windows.Foundation.Collections.IVector&lt;struct ABI.Windows.UI.Xaml.Documents.TextRange&gt;" />
+	<Interface GUID="913337E9-11A1-4345-A3A2-4E7F956E222D" Name="ABI.Windows.Foundation.Collections.IVector&lt;T&gt;" />
 	<Interface GUID="534832ED-2A03-5604-890D-5A928CD427B9" Name="ABI.Windows.Foundation.Collections.IVector&lt;UINT32&gt;" />
 	<Interface GUID="575933DF-34FE-4480-AF15-07691F3D5D9B" Name="ABI.Windows.Foundation.Collections.IVectorChangedEventArgs" />
 	<Interface GUID="172A655B-B3B8-5EAE-BC2E-A6A1F1708B4B" Name="ABI.Windows.Foundation.Collections.IVectorView&lt;__FIMapView_2_HSTRING_IInspectable*&gt;" />
@@ -4391,11 +4406,13 @@
 	<Interface GUID="823C7604-B37B-5465-A169-29497893CDB9" Name="ABI.Windows.Foundation.Collections.IVectorView&lt;struct ABI.Windows.Storage.Search.SortEntry&gt;" />
 	<Interface GUID="F49E7371-B31A-5620-A42E-7E969003F0FF" Name="ABI.Windows.Foundation.Collections.IVectorView&lt;struct ABI.Windows.UI.WindowId&gt;" />
 	<Interface GUID="C824D1D0-771A-5123-90CC-52281F0F287A" Name="ABI.Windows.Foundation.Collections.IVectorView&lt;struct ABI.Windows.UI.Xaml.Documents.TextRange&gt;" />
+	<Interface GUID="BBE1FA4C-B0E3-4583-BAEF-1F1B2E483E56" Name="ABI.Windows.Foundation.Collections.IVectorView&lt;T&gt;" />
 	<Interface GUID="9D0D0D9F-6A82-55A3-98C5-228499DF38F9" Name="ABI.Windows.Foundation.Collections.IVectorView&lt;UINT16&gt;" />
 	<Interface GUID="E5CE1A07-8D33-5007-BA64-7D2508CCF85C" Name="ABI.Windows.Foundation.Collections.IVectorView&lt;UINT32&gt;" />
 	<Interface GUID="23D156C7-7EF9-5096-AABA-1E6C9AB5CEB4" Name="ABI.Windows.Foundation.Collections.IVectorView&lt;UINT64&gt;" />
 	<Interface GUID="E2663F37-2E1B-500C-AD68-C3ED7A8F74C8" Name="ABI.Windows.Foundation.Collections.MapChangedEventHandler&lt;HSTRING, HSTRING&gt;" />
 	<Interface GUID="24F981E5-DDCA-538D-AADA-A59906084CF1" Name="ABI.Windows.Foundation.Collections.MapChangedEventHandler&lt;HSTRING, IInspectable*&gt;" />
+	<Interface GUID="179517F3-94EE-41F8-BDDC-768A895544F3" Name="ABI.Windows.Foundation.Collections.MapChangedEventHandler&lt;K, V&gt;" />
 	<Interface GUID="CB7B988B-468A-5EAE-AFE4-DF8B005F80AF" Name="ABI.Windows.Foundation.Collections.VectorChangedEventHandler&lt;ABI.Windows.ApplicationModel.Search.Core.SearchSuggestion*&gt;" />
 	<Interface GUID="BD1DC81C-23C4-5B4B-AC38-C5D34CDF34E4" Name="ABI.Windows.Foundation.Collections.VectorChangedEventHandler&lt;ABI.Windows.Media.Core.TimedMetadataTrack*&gt;" />
 	<Interface GUID="E12E6261-B198-56E0-9822-BA2D3BB6F8FE" Name="ABI.Windows.Foundation.Collections.VectorChangedEventHandler&lt;ABI.Windows.Media.Core.TimedTextSource*&gt;" />
@@ -4405,6 +4422,7 @@
 	<Interface GUID="20B884E1-C1DA-5332-B801-4F1C21744AC8" Name="ABI.Windows.Foundation.Collections.VectorChangedEventHandler&lt;ABI.Windows.UI.Xaml.Controls.ICommandBarElement*&gt;" />
 	<Interface GUID="B62DEC93-A7A5-5FF5-B2D2-6BD20CA0BD4D" Name="ABI.Windows.Foundation.Collections.VectorChangedEventHandler&lt;ABI.Windows.UI.Xaml.DependencyObject*&gt;" />
 	<Interface GUID="B423A801-D35E-56B9-813B-00889536CB98" Name="ABI.Windows.Foundation.Collections.VectorChangedEventHandler&lt;IInspectable*&gt;" />
+	<Interface GUID="0C051752-9FBF-4C70-AA0C-0E4C82D9A761" Name="ABI.Windows.Foundation.Collections.VectorChangedEventHandler&lt;T&gt;" />
 	<Interface GUID="50850B26-267E-451B-A890-AB6A370245EE" Name="ABI.Windows.Foundation.Diagnostics.IAsyncCausalityTracerStatics" />
 	<Interface GUID="378CBB01-2CC9-428F-8C55-2C990D463E8F" Name="ABI.Windows.Foundation.Diagnostics.IErrorDetails" />
 	<Interface GUID="B7703750-0B1D-46C8-AA0E-4B8178E4FCE9" Name="ABI.Windows.Foundation.Diagnostics.IErrorDetailsStatics" />
@@ -4428,7 +4446,9 @@
 	<Interface GUID="4E937EE5-58FD-45E0-8C2F-A132EFF95C1E" Name="ABI.Windows.Foundation.Diagnostics.ILoggingSessionFactory" />
 	<Interface GUID="65F16C35-E388-4E26-B17A-F51CD3A83916" Name="ABI.Windows.Foundation.Diagnostics.ILoggingTarget" />
 	<Interface GUID="410B7711-FF3B-477F-9C9A-D2EFDA302DC3" Name="ABI.Windows.Foundation.Diagnostics.ITracingStatusChangedEventArgs" />
+	<Interface GUID="9DE1C535-6AE1-11E0-84E1-18A905BCC53F" Name="ABI.Windows.Foundation.EventHandler&lt;T&gt;" />
 	<Interface GUID="9BBCAE23-3DD6-49C3-B63C-1C587E7A6A67" Name="ABI.Windows.Foundation.IActivatableClassRegistration" />
+	<Interface GUID="00000035-0000-0000-C000-000000000046" Name="ABI.Windows.Foundation.IActivationFactory" />
 	<Interface GUID="5A648006-843A-4DA9-865B-9D26E5DFAD7B" Name="ABI.Windows.Foundation.IAsyncAction" />
 	<Interface GUID="A4ED5C81-76C9-40BD-8BE6-B1D90FB20AE7" Name="ABI.Windows.Foundation.IAsyncActionCompletedHandler" />
 	<Interface GUID="44825C7C-0DA9-5691-B2B4-914F231EECED" Name="ABI.Windows.Foundation.IAsyncActionProgressHandler&lt;double&gt;" />
@@ -4436,10 +4456,12 @@
 	<Interface GUID="55E233CA-F243-5AE2-853B-F9CC7C0AE0CF" Name="ABI.Windows.Foundation.IAsyncActionProgressHandler&lt;UINT64&gt;" />
 	<Interface GUID="4F1430A6-A825-56CA-B047-1A9BAD52BA67" Name="ABI.Windows.Foundation.IAsyncActionWithProgress&lt;double&gt;" />
 	<Interface GUID="B7EB83F5-A746-50F2-B91F-31803161CCC7" Name="ABI.Windows.Foundation.IAsyncActionWithProgress&lt;struct ABI.Windows.Web.Syndication.TransferProgress&gt;" />
+	<Interface GUID="1F6DB258-E803-48A1-9546-EB7353398884" Name="ABI.Windows.Foundation.IAsyncActionWithProgress&lt;TProgress&gt;" />
 	<Interface GUID="43F713D0-C49D-5E55-AEBF-AF395768351E" Name="ABI.Windows.Foundation.IAsyncActionWithProgress&lt;UINT64&gt;" />
 	<Interface GUID="94D64AC6-4491-53EF-8BE8-36481F3FF1E8" Name="ABI.Windows.Foundation.IAsyncActionWithProgressCompletedHandler&lt;double&gt;" />
 	<Interface GUID="F1C031C8-90BF-5CAE-ADF6-155B4AEDFB60" Name="ABI.Windows.Foundation.IAsyncActionWithProgressCompletedHandler&lt;struct ABI.Windows.Web.Syndication.TransferProgress&gt;" />
 	<Interface GUID="E6FF857B-F160-571A-A934-2C61F98C862D" Name="ABI.Windows.Foundation.IAsyncActionWithProgressCompletedHandler&lt;UINT64&gt;" />
+	<Interface GUID="00000036-0000-0000-C000-000000000046" Name="ABI.Windows.Foundation.IAsyncInfo" />
 	<Interface GUID="84E30B9C-351D-5FCB-8B0A-BC145407F915" Name="ABI.Windows.Foundation.IAsyncOperation&lt;__FIMap_2_HSTRING_HSTRING*&gt;" />
 	<Interface GUID="127E39C7-07C1-58E5-B48E-3A4729839FEC" Name="ABI.Windows.Foundation.IAsyncOperation&lt;__FIMap_2_HSTRING_IInspectable*&gt;" />
 	<Interface GUID="817944B6-F046-5391-BB0B-4CC34D8040F3" Name="ABI.Windows.Foundation.IAsyncOperation&lt;__FIMapView_2_HSTRING_HSTRING*&gt;" />
@@ -5061,6 +5083,7 @@
 	<Interface GUID="E2B45A37-E1C1-5E80-8962-A134D7F3557C" Name="ABI.Windows.Foundation.IAsyncOperation&lt;struct ABI.Windows.Media.Streaming.PositionInformation&gt;" />
 	<Interface GUID="F99E7D9C-2274-5F3D-89E7-F5F862BA0334" Name="ABI.Windows.Foundation.IAsyncOperation&lt;struct ABI.Windows.Media.Streaming.TransportInformation&gt;" />
 	<Interface GUID="C788089D-37AB-5BA2-B865-5A309ACDFC4D" Name="ABI.Windows.Foundation.IAsyncOperation&lt;struct ABI.Windows.UI.Xaml.Data.LoadMoreItemsResult&gt;" />
+	<Interface GUID="9FC2B0BB-E446-44E2-AA61-9CAB8F636AF2" Name="ABI.Windows.Foundation.IAsyncOperation&lt;TResult&gt;" />
 	<Interface GUID="EF60385F-BE78-584B-AAEF-7829ADA2B0DE" Name="ABI.Windows.Foundation.IAsyncOperation&lt;UINT32&gt;" />
 	<Interface GUID="2A70D630-0767-5F0A-A1C2-DEB08126E26E" Name="ABI.Windows.Foundation.IAsyncOperation&lt;UINT64&gt;" />
 	<Interface GUID="39BB624E-B5C6-5785-BA46-3F45AAF3EF35" Name="ABI.Windows.Foundation.IAsyncOperationCompletedHandler&lt;__FIMap_2_HSTRING_HSTRING*&gt;" />
@@ -5758,6 +5781,7 @@
 	<Interface GUID="272EEC20-4B64-5D53-A644-F9917B3D19D8" Name="ABI.Windows.Foundation.IAsyncOperationWithProgress&lt;enum ABI.Windows.Media.Transcoding.TranscodeFailureReason, double&gt;" />
 	<Interface GUID="91ECBE45-E889-5518-BD8D-C5BDE163109B" Name="ABI.Windows.Foundation.IAsyncOperationWithProgress&lt;HSTRING, struct ABI.Windows.Web.Http.HttpProgress&gt;" />
 	<Interface GUID="C8BBCB29-6B64-5CE2-A831-038F6E02199E" Name="ABI.Windows.Foundation.IAsyncOperationWithProgress&lt;HSTRING, UINT64&gt;" />
+	<Interface GUID="B5D036D7-E297-498F-BA60-0289E76E23DD" Name="ABI.Windows.Foundation.IAsyncOperationWithProgress&lt;TResult, TProgress&gt;" />
 	<Interface GUID="ECCB574A-C684-5572-A679-6B0842CFB57F" Name="ABI.Windows.Foundation.IAsyncOperationWithProgress&lt;UINT32, UINT32&gt;" />
 	<Interface GUID="8F1DB6E3-6556-5516-825C-1021EE27CD0C" Name="ABI.Windows.Foundation.IAsyncOperationWithProgress&lt;UINT64, UINT64&gt;" />
 	<Interface GUID="C0454CFC-2F2F-5E0C-8DE9-58B9E82A03BA" Name="ABI.Windows.Foundation.IAsyncOperationWithProgressCompletedHandler&lt;__FIVectorView_1_Windows__CDevices__CSms__CISmsMessage*, int&gt;" />
@@ -5842,6 +5866,7 @@
 	<Interface GUID="EC734A06-0401-4317-BAC1-3B7E207242E3" Name="ABI.Windows.Foundation.IExeServerRegistration" />
 	<Interface GUID="4EDB8EE2-96DD-49A7-94F7-4607DDAB8E3C" Name="ABI.Windows.Foundation.IGetActivationFactory" />
 	<Interface GUID="59C7966B-AE52-5283-AD7F-A1B9E9678ADD" Name="ABI.Windows.Foundation.IGuidHelperStatics" />
+	<Interface GUID="AF86E2E0-B12D-4C6A-9C5A-D7AA65101E90" Name="ABI.Windows.Foundation.IInspectable" />
 	<Interface GUID="FBC4DD2A-245B-11E4-AF98-689423260CF8" Name="ABI.Windows.Foundation.IMemoryBuffer" />
 	<Interface GUID="FBC4DD2B-245B-11E4-AF98-689423260CF8" Name="ABI.Windows.Foundation.IMemoryBufferFactory" />
 	<Interface GUID="FBC4DD29-245B-11E4-AF98-689423260CF8" Name="ABI.Windows.Foundation.IMemoryBufferReference" />
@@ -5892,8 +5917,10 @@
 	<Interface GUID="44DD686B-C7D8-582C-91C2-D98E604DCFD4" Name="ABI.Windows.Foundation.IReference&lt;struct ABI.Windows.Perception.Spatial.SpatialRay&gt;" />
 	<Interface GUID="AB8E5D11-B0C1-5A21-95AE-F16BF3A37624" Name="ABI.Windows.Foundation.IReference&lt;struct ABI.Windows.UI.Color&gt;" />
 	<Interface GUID="A19F7BA8-D8CD-5DF2-AB44-FEFD26644484" Name="ABI.Windows.Foundation.IReference&lt;struct ABI.Windows.UI.Xaml.Thickness&gt;" />
+	<Interface GUID="61C17706-2D65-11E0-9AE8-D48564015472" Name="ABI.Windows.Foundation.IReference&lt;T&gt;" />
 	<Interface GUID="513EF3AF-E784-5325-A91E-97C2B8111CF3" Name="ABI.Windows.Foundation.IReference&lt;UINT32&gt;" />
 	<Interface GUID="6755E376-53BB-568B-A11D-17239868309E" Name="ABI.Windows.Foundation.IReference&lt;UINT64&gt;" />
+	<Interface GUID="61C17707-2D65-11E0-9AE8-D48564015472" Name="ABI.Windows.Foundation.IReferenceArray&lt;T&gt;" />
 	<Interface GUID="96369F54-8EB6-48F0-ABCE-C1B211E627C3" Name="ABI.Windows.Foundation.IStringable" />
 	<Interface GUID="79971E44-6520-58A7-B3A2-3B596D54E4E0" Name="ABI.Windows.Foundation.ITypedEventHandler&lt;ABI.Microsoft.Diagnostics.AppAnalysis.IRule*, ABI.Microsoft.Diagnostics.AppAnalysis.RuleTriggeredEventArgs*&gt;" />
 	<Interface GUID="7725B2A5-287D-5ED2-A789-2A6A2673C7FE" Name="ABI.Windows.Foundation.ITypedEventHandler&lt;ABI.Windows.ApplicationModel.Activation.SplashScreen*, IInspectable*&gt;" />
@@ -6767,6 +6794,7 @@
 	<Interface GUID="26AABF41-A0FD-5E66-B188-6C74182D00CD" Name="ABI.Windows.Foundation.ITypedEventHandler&lt;IInspectable*, ABI.Windows.UI.Core.PointerEventArgs*&gt;" />
 	<Interface GUID="C76E9D25-6A96-58FD-874F-AE52BD603AF8" Name="ABI.Windows.Foundation.ITypedEventHandler&lt;IInspectable*, ABI.Windows.UI.Core.TouchHitTestingEventArgs*&gt;" />
 	<Interface GUID="C7E65CE2-FAD5-5E3B-9C58-186CA8C1DD57" Name="ABI.Windows.Foundation.ITypedEventHandler&lt;IInspectable*, IInspectable*&gt;" />
+	<Interface GUID="00000000-0000-0000-C000-000000000046" Name="ABI.Windows.Foundation.IUnknown" />
 	<Interface GUID="C1D432BA-C824-4452-A7FD-512BC3BBE9A1" Name="ABI.Windows.Foundation.IUriEscapeStatics" />
 	<Interface GUID="9E365E57-48B2-4160-956F-C7385120BBFC" Name="ABI.Windows.Foundation.IUriRuntimeClass" />
 	<Interface GUID="44A9796F-723E-4FDF-A218-033E75B0C084" Name="ABI.Windows.Foundation.IUriRuntimeClassFactory" />
@@ -6775,6 +6803,7 @@
 	<Interface GUID="D45A0451-F225-4542-9296-0E1DF5D254DF" Name="ABI.Windows.Foundation.IWwwFormUrlDecoderRuntimeClass" />
 	<Interface GUID="5B8C6B3D-24AE-41B5-A1BF-F0C3D544845B" Name="ABI.Windows.Foundation.IWwwFormUrlDecoderRuntimeClassFactory" />
 	<Interface GUID="997439FE-F681-4A11-B416-C13A47E8BA36" Name="ABI.Windows.Foundation.Metadata.IApiInformationStatics" />
+	<Interface GUID="9DE1C534-6AE1-11E0-84E1-18A905BCC53F" Name="ABI.Windows.Foundation.TypedEventHandler&lt;TSender, TResult&gt;" />
 	<Interface GUID="69A0AE5E-758E-4CBE-ACE6-62155FE9126F" Name="ABI.Windows.Gaming.Input.Custom.ICustomGameControllerFactory" />
 	<Interface GUID="36CB66E3-D0A1-4986-A24C-40B137DEBA9E" Name="ABI.Windows.Gaming.Input.Custom.IGameControllerFactoryManagerStatics" />
 	<Interface GUID="EACE5644-19DF-4115-B32A-2793E2AEA3BB" Name="ABI.Windows.Gaming.Input.Custom.IGameControllerFactoryManagerStatics2" />
@@ -7154,6 +7183,8 @@
 	<Interface GUID="69FBDBBA-B12E-429B-8386-DF5284F6E80F" Name="ABI.Windows.Graphics.Printing3D.IPrinting3DTexture2CoordMaterialGroup2" />
 	<Interface GUID="CBB049B0-468A-4C6F-B2A2-8EB8BA8DEA48" Name="ABI.Windows.Graphics.Printing3D.IPrinting3DTexture2CoordMaterialGroupFactory" />
 	<Interface GUID="A70DF32D-6AB1-44AE-BC45-A27382C0D38C" Name="ABI.Windows.Graphics.Printing3D.IPrinting3DTextureResource" />
+	<Interface GUID="DE27A01F-B561-4531-A278-FD012679EF1E" Name="ABI.Windows.Internal.Holographic.UI.IHolographicViewPropertiesFactory" />
+	<Interface GUID="343BAA78-E34F-466C-9FFA-81AF5CE4CD34" Name="ABI.Windows.Internal.Security.SmartScreen.IAppReputationServiceFactory" />
 	<Interface GUID="74D10432-2E99-4000-9A3A-64307E858129" Name="ABI.Windows.Management.Core.IApplicationDataManager" />
 	<Interface GUID="1E1862E3-698E-49A1-9752-DEE94925B9B3" Name="ABI.Windows.Management.Core.IApplicationDataManagerStatics" />
 	<Interface GUID="05CEE018-F68F-422B-95A4-66679EC77FC0" Name="ABI.Windows.Management.Deployment.IAddPackageOptions" />
@@ -9620,6 +9651,14 @@
 	<Interface GUID="BF9918EA-D801-4564-A495-B1E84F8AD085" Name="ABI.Windows.UI.Core.IVisibilityChangedEventArgs" />
 	<Interface GUID="179D65E7-4658-4CB6-AA13-41D094EA255E" Name="ABI.Windows.UI.Core.IWindowActivatedEventArgs" />
 	<Interface GUID="5A200EC7-0426-47DC-B86C-6F475915E451" Name="ABI.Windows.UI.Core.IWindowSizeChangedEventArgs" />
+	<Interface GUID="F0190610-05AF-4250-B96A-A74EDEF77A0D" Name="ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamCleanupRequestedEventArgs" />
+	<Interface GUID="661F4165-FE71-44AF-9568-6CC7CF29CD4C" Name="ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamCommandInvokedEventArgs" />
+	<Interface GUID="8959C9B9-02FC-4D1D-8921-D61E7766CB89" Name="ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamDeviceCredentials" />
+	<Interface GUID="10B149E1-B6F1-4CA7-B4CE-2C66A4A64699" Name="ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamEndMeetingRequestedEventArgs" />
+	<Interface GUID="421E6ADB-98D7-41AE-BA49-6CAF559B8F5A" Name="ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamJoinMeetingRequestedEventArgs" />
+	<Interface GUID="6F616677-02AE-49A0-AA50-862D078CF9B1" Name="ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamView" />
+	<Interface GUID="BD44B2A2-0D77-416D-A370-9EA5ECE46229" Name="ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamView2" />
+	<Interface GUID="FE241233-D49C-49EE-B798-EC31D9543938" Name="ABI.Windows.UI.Core.Preview.Communications.IPreviewTeamViewStatics" />
 	<Interface GUID="A4F6E665-365E-5FDE-87A5-9543C3A15AA8" Name="ABI.Windows.UI.Core.Preview.ICoreAppWindowPreview" />
 	<Interface GUID="33AC21BE-423B-5DB6-8A8E-4DC87353B75B" Name="ABI.Windows.UI.Core.Preview.ICoreAppWindowPreviewStatics" />
 	<Interface GUID="83D00DE1-CBE5-4F31-8414-361DA046518F" Name="ABI.Windows.UI.Core.Preview.ISystemNavigationCloseRequestedPreviewEventArgs" />
@@ -10052,6 +10091,21 @@
 	<Interface GUID="595C97A5-F8F6-41CF-B0FB-AACDB81FD5F6" Name="ABI.Windows.UI.ViewManagement.IUIViewSettingsStatics" />
 	<Interface GUID="878FCD3A-0B99-42C9-84D0-D3F1D403554B" Name="ABI.Windows.UI.ViewManagement.IViewModePreferences" />
 	<Interface GUID="69B60A65-5DE5-40D8-8306-3833DF7A2274" Name="ABI.Windows.UI.ViewManagement.IViewModePreferencesStatics" />
+	<Interface GUID="A4FC0016-DBE5-41AD-8D7B-14698BD6911D" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBar" />
+	<Interface GUID="858F4F45-08D8-4A46-81EC-00015B0B1C6C" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarBitmapIcon" />
+	<Interface GUID="F3F7D78A-7673-444A-BE62-AC12D31C2231" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarBitmapIconFactory" />
+	<Interface GUID="86E7824A-E3D5-4EB6-B2FF-8F018A172105" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarConfirmationButton" />
+	<Interface GUID="C9069EC2-284A-4633-8AAD-637A27E282C3" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarElement" />
+	<Interface GUID="D587655D-2014-42BE-969A-7D14CA6C8A49" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarIcon" />
+	<Interface GUID="8F1BC93A-3A7C-4842-A0CF-AFF6EA308586" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarIconButton" />
+	<Interface GUID="304EDBDD-E741-41EF-BDC4-A45CEA2A4F70" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarItemInvokedEventArgs" />
+	<Interface GUID="FBF1E2F6-3029-4719-8378-92F82B87AF1E" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarSizeChangedEventArgs" />
+	<Interface GUID="1449CDB9-A506-45BE-8F42-B2837E2FE0C9" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarStatics" />
+	<Interface GUID="D4935477-FD26-46ED-8658-1A3F4400E7B3" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarSymbolIcon" />
+	<Interface GUID="51BE1A1F-3730-429E-B622-14E2B7BF6A07" Name="ABI.Windows.UI.WebUI.Core.IWebUICommandBarSymbolIconFactory" />
+	<Interface GUID="435387C8-4DD0-4C52-9489-D390CE7721D2" Name="ABI.Windows.UI.WebUI.Core.MenuClosedEventHandler" />
+	<Interface GUID="18DC0AD3-678F-4C19-8963-CC1C49A5EF9E" Name="ABI.Windows.UI.WebUI.Core.MenuOpenedEventHandler" />
+	<Interface GUID="D49CFE3C-DD2E-4C28-B627-303A7F911AF5" Name="ABI.Windows.UI.WebUI.Core.SizeChangedEventHandler" />
 	<Interface GUID="C3BD1978-A431-49D8-A76A-395A4E03DCF3" Name="ABI.Windows.UI.WebUI.IActivatedDeferral" />
 	<Interface GUID="CA6D5F74-63C2-44A6-B97B-D9A03C20BC9B" Name="ABI.Windows.UI.WebUI.IActivatedEventArgsDeferral" />
 	<Interface GUID="50F1E730-C5D1-4B6B-9ADB-8A11756BE29C" Name="ABI.Windows.UI.WebUI.IActivatedEventHandler" />
@@ -11623,6 +11677,7 @@
 	<Interface GUID="843BC4C3-C105-59FE-A3D1-373C1D3E6FBC" Name="ABI.Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics3" />
 	<Interface GUID="56096C31-1AA0-5288-8818-6E74A2DCAFF5" Name="ABI.Windows.UI.Xaml.Hosting.IWindowsXamlManager" />
 	<Interface GUID="28258A12-7D82-505B-B210-712B04A58882" Name="ABI.Windows.UI.Xaml.Hosting.IWindowsXamlManagerStatics" />
+	<Interface GUID="3EAD2336-B073-456F-BCAF-82587EB63487" Name="ABI.Windows.UI.Xaml.Hosting.IXamlIslandFactory" />
 	<Interface GUID="FBB93BB5-1496-5A80-AC00-E757359755E6" Name="ABI.Windows.UI.Xaml.Hosting.IXamlSourceFocusNavigationRequest" />
 	<Interface GUID="E746AB8F-B4EF-5390-97E5-CC0A2779C574" Name="ABI.Windows.UI.Xaml.Hosting.IXamlSourceFocusNavigationRequestFactory" />
 	<Interface GUID="88D55A5F-9603-5D8F-9CC7-D1C4070D9801" Name="ABI.Windows.UI.Xaml.Hosting.IXamlSourceFocusNavigationResult" />
@@ -16418,6 +16473,7 @@
 	<Interface GUID="1E00486A-78DD-11D2-8DD3-006097C9A2B2" Name="IBufferingTime" />
 	<Interface GUID="D2FFD834-958B-426D-8470-2A13879C6A91" Name="IBurnVerification" />
 	<Interface GUID="58925FB9-7C5E-4684-833B-4A04E1286690" Name="ICacheProvider" />
+	<Interface GUID="0A299774-3E4E-FC42-1D9D-72CEE105CA57" Name="ICallbackWithNoReentrancyToApplicationSTA" />
 	<Interface GUID="1C733A30-2A1C-11CE-ADE5-00AA0044773D" Name="ICallFactory" />
 	<Interface GUID="D573B4B0-894E-11D2-B8B6-00C04FB9618A" Name="ICallFrame" />
 	<Interface GUID="FD5E0843-FC91-11D0-97D7-00C04FB9618A" Name="ICallFrameEvents" />
@@ -21761,6 +21817,9 @@
 	<Interface GUID="75D69CC5-D2BF-4943-876E-B45B62A6CC66" Name="IsSynchronizedInputPatternAvailable_Property_GUID" />
 	<Interface GUID="CB83575F-45C2-4048-9C76-159715A139DF" Name="IsTablePatternAvailable_Property_GUID" />
 	<Interface GUID="4CD19ADA-25A5-4A32-B3B7-347BEE5BE36B" Name="IStartMenuPinnedList" />
+	<Interface GUID="17B0E613-942A-422D-904C-F90DC71A7DAE" Name="IStaticLifetime" />
+	<Interface GUID="1B0D3570-0877-5EC2-8A2C-3B9539506ACA" Name="IStaticLifetimeCollection"
+	           Warning="This GUID is ambiguous for IStaticLifetimeCollection and ABI.Windows.Foundation.Collections.IMap&lt;HSTRING, IInspectable*&gt;" />
 	<Interface GUID="6F10711F-729B-41E5-93B8-F21D0F818DF1" Name="IStaticPortMapping" />
 	<Interface GUID="CD1F3E77-66D6-4664-82C7-36DBB641D0F1" Name="IStaticPortMappingCollection" />
 	<Interface GUID="00000018-0000-0000-C000-000000000046" Name="IStdMarshalInfo" />

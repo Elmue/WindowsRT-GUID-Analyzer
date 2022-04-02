@@ -98,9 +98,16 @@ namespace GuidAnalyzer
             int s32_FileCount = 0;
 
             // These SDK subfolders contain all documented Windows interface declarations
-            foreach (String s_SubDir in new String[] { "winrt", "um", "shared" })
+            foreach (String s_SubDir in new String[] { 
+                                                      "winrt", 
+                                                     @"cppwinrt\winrt", 
+                                                     @"cppwinrt\winrt\impl", 
+                                                      "um", 
+                                                      "shared" 
+                                                      })
             {
-                if (ONLY_WINRT && s_SubDir != "winrt")
+                bool b_WinRT = s_SubDir.Contains("winrt");
+                if (ONLY_WINRT && !b_WinRT)
                     continue;
 
                 String s_Folder = SDK_PATH + s_SubDir;
@@ -142,7 +149,7 @@ namespace GuidAnalyzer
 
                             String[] s_Parts = s_Line.Split('=');
                             if (s_Parts.Length == 2)
-                                s_GUID = ExtractHexGuid(s_Lines, ref L);
+                                s_GUID = ExtractHexGuidMultiLine(s_Lines, ref L);
 
                             if (s_GUID != null)
                             {
@@ -185,6 +192,35 @@ namespace GuidAnalyzer
                             continue;
                         }
 
+                        // template <> inline constexpr guid guid_v<Windows::AI::MachineLearning::IImageFeatureDescriptor>{ 0x365585A5,0x171A,0x4A2A,{ 0x98,0x5F,0x26,0x51,0x59,0xD3,0x89,0x5A } };
+                        int s32_ConstExpr = s_Line.IndexOf("inline constexpr guid");
+                        if (s32_ConstExpr > 0)
+                        {
+                            int s32_Start = s_Line.IndexOf("<", s32_ConstExpr);
+                            int s32_End   = s_Line.LastIndexOf(">");
+                            if (s32_Start > 0 && s32_End > s32_Start)
+                            {
+                                String s_Interface = s_Line.Substring(s32_Start + 1, s32_End - s32_Start - 1).Replace("::", ".");
+                                s_GUID = ExtractHexGuidInline(s_Line);
+
+                                if (s_Interface.Length > 3 && s_GUID != null)
+                                {
+                                    if (b_WinRT && s_Interface.Contains(".") && !s_Interface.StartsWith("ABI."))
+                                        s_Interface = "ABI." + s_Interface;
+
+                                    AddInterface(s_GUID, s_Interface, i_Interfaces, i_Guids, i_Ambiguous);
+                                    continue;
+                                }
+                            }
+
+                            // There are several lines without GUID. This is not an error.
+                            if (s_GUID != null)
+                                Console.WriteLine("Syntax Error in line " + (s32_FirstLine +1) + " in " + s_FileName);
+
+                            continue;
+                        }
+
+                        // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
                         Match i_Match = Regex.Match(s_Line, "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}");
@@ -345,6 +381,11 @@ namespace GuidAnalyzer
                 }
             }
 
+            // Add undocumented interfaces
+            AddInterface("343BAA78-E34F-466C-9FFA-81AF5CE4CD34", "ABI.Windows.Internal.Security.SmartScreen.IAppReputationServiceFactory", i_Interfaces, i_Guids, i_Ambiguous);
+            AddInterface("3EAD2336-B073-456F-BCAF-82587EB63487", "ABI.Windows.UI.Xaml.Hosting.IXamlIslandFactory",                         i_Interfaces, i_Guids, i_Ambiguous);
+            AddInterface("DE27A01F-B561-4531-A278-FD012679EF1E", "ABI.Windows.Internal.Holographic.UI.IHolographicViewPropertiesFactory",  i_Interfaces, i_Guids, i_Ambiguous);
+
             Console.WriteLine("\n" +i_Interfaces.Count+ " interfaces found in "+s32_FileCount+" files.\n");
             WriteInterfaces(i_Interfaces, i_Ambiguous, SDK_BUILD);
         }
@@ -466,7 +507,7 @@ namespace GuidAnalyzer
         /// { 0xb2, 0x97, 0x81, 0xce, 0x9e, 0x18, 0x93, 0x3f } 
         /// };
         /// </summary>
-        static String ExtractHexGuid(String[] s_Lines, ref int L)
+        static String ExtractHexGuidMultiLine(String[] s_Lines, ref int L)
         {
             String s_Concat = "";
             do
@@ -477,20 +518,25 @@ namespace GuidAnalyzer
             }
             while (CountChars(s_Concat, '}') < 2);
 
-            s_Concat = s_Concat.Replace(" ", "");
+            return ExtractHexGuidInline(s_Concat);
+        }
 
-            int s32_Start = s_Concat.IndexOf('{');
+        static String ExtractHexGuidInline(String s_Line)
+        {
+            s_Line = s_Line.Replace(" ", "");
+
+            int s32_Start = s_Line.IndexOf('{');
             if (s32_Start < 0)
                 return null;
 
-            int s32_End = s_Concat.IndexOf("}}");
+            int s32_End = s_Line.IndexOf("}}");
             if (s32_End < 0)
                 return null;
 
-            s_Concat = s_Concat.Substring(s32_Start, s32_End - s32_Start);
-            s_Concat = s_Concat.Replace("{", "");
+            s_Line = s_Line.Substring(s32_Start, s32_End - s32_Start);
+            s_Line = s_Line.Replace("{", "");
 
-            return HexListToGuid(s_Concat.Split(','));
+            return HexListToGuid(s_Line.Split(','));
         }
 
         /// <summary>
@@ -644,7 +690,6 @@ namespace GuidAnalyzer
                 s_Line.StartsWith("#if ")      || 
                 s_Line.StartsWith("#endif")    || 
                 s_Line.StartsWith("#define ")  || 
-                s_Line.StartsWith("template ") ||
                 s_Line.StartsWith("DEPRECATED"))
                 return false;
 
@@ -721,14 +766,19 @@ namespace GuidAnalyzer
             String s_ExistName;
             if (i_Guids.TryGetValue(s_GUID, out s_ExistName))
             {
+                String s_NameI      = Insert_I(s_Name);
+                String s_ExistNameI = Insert_I(s_ExistName);
+
                 // Same interface defined as KSMFT_CATEGORY_AUDIO_ENCODER and MFT_CATEGORY_AUDIO_ENCODER
                 // Same interface defined as ScriptingContext and CLSID_ScriptingContext
-                if (s_ExistName.Contains(s_Name))
+                if (s_ExistName.Contains(s_Name) || 
+                    s_ExistName.Contains(s_NameI))
                 {
                     // store the longer name (s_ExistName)
                     s_Name = s_ExistName;
                 }
-                else if (s_Name.Contains(s_ExistName))
+                else if (s_Name.Contains(s_ExistName) || 
+                         s_Name.Contains(s_ExistNameI))
                 {
                     // store the longer name (s_Name)
                 }
@@ -757,6 +807,29 @@ namespace GuidAnalyzer
             }
             i_Interfaces[s_Name] = s_GUID;
             return true;
+        }
+
+        /// <summary>
+        /// Avoid error for "ABI.Windows.Foundation.AsyncActionCompletedHandler" 
+        ///             and "ABI.Windows.Foundation.IAsyncActionCompletedHandler"
+        /// by inserting an "I" as first character of the interface name.
+        ///         
+        /// But do not modify "DateTime" in angle backets:
+        /// "ABI.Windows.Foundation.IReference<struct ABI.Windows.Foundation.DateTime>"
+        /// Attention: 
+        /// The interface name may already start with 'I': IdleDispatchedHandler / IIdleDispatchedHandler
+        /// </summary>
+        static String Insert_I(String s_Interface)
+        {
+            int s32_Angle = s_Interface.IndexOf('<');
+            if (s32_Angle < 0)
+                s32_Angle = s_Interface.Length -1;
+
+            int s32_LastDot = s_Interface.LastIndexOf('.', s32_Angle);
+            if (s32_LastDot > 0)
+                return s_Interface.Insert(s32_LastDot + 1, "I");
+
+            return s_Interface;
         }
 
         // =========================================================================================
@@ -798,7 +871,7 @@ namespace GuidAnalyzer
 
                         i_Htm.AppendFormat("\t<tr><td colspan='2' class='Warning'>The following GUID is ambiguous for {0}</td></tr>\r\n", Amp(s_Ambig));
                         i_Ini.AppendFormat("\r\n; The following GUID is ambiguous for {0}\r\n",                  s_Ambig);
-                        i_Cpp.AppendFormat("\r\n\t\t// The following GUID is ambiguous for {0}\r\n",             s_Ambig); 
+                    //  i_Cpp.AppendFormat("\r\n\t\t// The following GUID is ambiguous for {0}\r\n",             s_Ambig); 
                         i_CS .AppendFormat("\r\n\t\t// The following GUID is ambiguous for {0}\r\n",             s_Ambig);
                         s_XmlWarn = String.Format("\r\n\t           Warning=\"This GUID is ambiguous for {0}\"", Amp(s_Ambig));
                     }
@@ -806,7 +879,7 @@ namespace GuidAnalyzer
                     i_Ini.AppendFormat("{0} = {1}\r\n",                                    s_GUID, i_Pair.Key);
                     i_Xml.AppendFormat("\t<Interface GUID=\"{0}\" Name=\"{1}\"{2} />\r\n", s_GUID, Amp(i_Pair.Key), s_XmlWarn);
                     i_Htm.AppendFormat("\t<tr><td>{0}</td><td>{1}</td></tr>\r\n",          s_GUID, Amp(i_Pair.Key));
-                    i_Cpp.AppendFormat("\t\tInterfaces().SetAt(L\"{0}\", L\"{1}\");\r\n",  s_GUID, i_Pair.Key);
+                //  i_Cpp.AppendFormat("\t\tInterfaces().SetAt(L\"{0}\", L\"{1}\");\r\n",  s_GUID, i_Pair.Key);
                     i_CS .AppendFormat("\t\tmi_Interfaces[\"{0}\"] = \"{1}\";\r\n",        s_GUID, i_Pair.Key);
                 }
             }

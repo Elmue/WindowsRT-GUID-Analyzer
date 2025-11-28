@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ElmueSoft")]
 [assembly: AssemblyProduct("GuidAnalyzer")]
-[assembly: AssemblyCopyright("No Copyright ©2022")]
+[assembly: AssemblyCopyright("No Copyright ©2025")]
 [assembly: AssemblyTrademark("https://github.com/Elmue/WindowsRT-GUID-Analyzer")]
 [assembly: AssemblyCulture("")]
 

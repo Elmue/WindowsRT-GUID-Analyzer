@@ -4,7 +4,7 @@ With IInspectable->GetIids() you can get a lot of IIDs but getting the informati
 
 Now you can easily implement a Debug function into your code which displays interface names instead of cryptic GUID's.
 
-This tool which has 2 functionalities:
+This tool has 2 functionalities:
 
 1.) Extract all Windows RT Activitable Classes from the Windows Registry and find out in which DLL they are implemented
 
